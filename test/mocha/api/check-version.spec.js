@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {checkVersionImmutable} from '../../../src/api/check-version'
-import {ImmutableAggregateRoot, AggregateMeta} from 'event-store'
+import {ImmutableAggregateRoot, AggregateMeta} from '@rheactorjs/event-store'
 import {ConflictError} from '@rheactorjs/errors'
 
 describe('checkVersionImmutable', () => {

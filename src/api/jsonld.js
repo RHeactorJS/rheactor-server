@@ -1,7 +1,7 @@
 import {Link, LinkType, Index} from '@rheactorjs/models'
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {dict, String as StringType, irreducible} from 'tcomb'
-import {AggregateIdType} from 'event-store'
+import {AggregateIdType} from '@rheactorjs/event-store'
 import {ValidationFailedError} from '@rheactorjs/errors'
 
 const IdMapType = dict(StringType, AggregateIdType)

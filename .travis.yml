@@ -22,7 +22,7 @@ install:
   - npm prune
   - npm install
   - npm-install-peers
-  - cd node_modules; ln -s ../ server; cd ..
+  - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server
 script:
   - npm run lint
   - make dist

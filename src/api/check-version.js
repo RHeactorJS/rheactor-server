@@ -1,5 +1,5 @@
 import {ValidationFailedError, ConflictError} from '@rheactorjs/errors'
-import {AggregateRootType, ImmutableAggregateRootType} from 'event-store'
+import {AggregateRootType, ImmutableAggregateRootType} from '@rheactorjs/event-store'
 import {PositiveIntegerType} from '../util/pagination'
 
 /**

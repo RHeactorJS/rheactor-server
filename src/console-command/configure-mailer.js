@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import TemplateMailerClient from 'template-mailer-aws-lambda-client'
+import TemplateMailerClient from '@rheactorjs/template-mailer-client'
 import {emails} from '../services/emails'
 
 export default {

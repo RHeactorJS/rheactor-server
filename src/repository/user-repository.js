@@ -1,4 +1,4 @@
-import {AggregateRepository, AggregateIndex, ModelEvent, ModelEventType} from 'event-store'
+import {AggregateRepository, AggregateIndex, ModelEvent, ModelEventType} from '@rheactorjs/event-store'
 import {UserModel, UserModelType, MaybeUserModelType} from '../model/user'
 import {EntryNotFoundError} from '@rheactorjs/errors'
 import {EmailValueType} from '@rheactorjs/value-objects'

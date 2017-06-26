@@ -1,4 +1,4 @@
-import {ModelEvent, AggregateRoot} from 'event-store'
+import {ModelEvent, AggregateRoot} from '@rheactorjs/event-store'
 import {ValidationFailedError, ConflictError, UnhandledDomainEventError} from '@rheactorjs/errors'
 import {String as StringType, Any as AnyType, Boolean as BooleanType, irreducible, maybe, dict} from 'tcomb'
 import {URIValue, URIValueType, MaybeURIValueType, EmailValue, EmailValueType} from '@rheactorjs/value-objects'

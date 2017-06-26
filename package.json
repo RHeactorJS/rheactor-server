@@ -31,7 +31,7 @@
     "@rheactorjs/errors": "1.x",
     "@rheactorjs/event-store": "1.x",
     "@rheactorjs/models": "1.x",
-    "@rheactorjs/template-mailer-aws-lambda-client": "1.x",
+    "@rheactorjs/template-mailer-client": "1.x",
     "@rheactorjs/value-objects": "1.x",
     "bcrypt": "^1.0.0",
     "body-parser": "^1.16.1",

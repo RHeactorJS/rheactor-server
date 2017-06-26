@@ -1,7 +1,7 @@
 import path from 'path'
 import glob from 'glob'
 import app from '../server'
-import runner from 'yadda-feature-runner'
+import runner from '@rheactorjs/yadda-feature-runner'
 import {InternalContext, RestClientContext, TimeContext} from '@rheactorjs/bdd-contexts'
 
 app.redis.flushdb()

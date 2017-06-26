@@ -6,7 +6,7 @@ import {expect} from 'chai'
 import {CreateUserCommand} from '../../../src/command/user/create'
 import {EmailValue} from '@rheactorjs/value-objects'
 import {UserModel} from '../../../src/model/user'
-import {ModelEvent} from 'event-store'
+import {ModelEvent} from '@rheactorjs/event-store'
 import emitter from '../../../src/services/emitter'
 
 describe('UserRepository', function () {
