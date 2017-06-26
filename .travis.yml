@@ -1,5 +1,5 @@
 language: node_js
-node_js: 'node'
+node_js: '7'
 env:
   global:
     - CXX=g++-4.8
