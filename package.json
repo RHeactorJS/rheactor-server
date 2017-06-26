@@ -1,6 +1,6 @@
 {
   "name": "@rheactorjs/server",
-  "description": "Core server components for RHeactor applications",
+  "description": "Core server components for RHeactorJS applications",
   "version": "0.0.0-development",
   "scripts": {
     "lint": "standard",

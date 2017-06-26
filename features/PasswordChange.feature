@@ -3,8 +3,8 @@ Feature: Change password
 
   Background: Client defaults
 
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Accept header
-    And   "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Content-Type header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Accept header
+    And   "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Content-Type header
 
   Scenario: Request password change token
 

@@ -4,15 +4,15 @@ import config from './config'
 import emitter from '../src/services/emitter'
 import {RedisConnection} from '../src/services/redis-connection'
 import {UserRepository} from '../src/repository/user-repository'
-import {rheactorCommandHandler} from '../src/config/command-handler'
-import {rheactorEventHandler} from '../src/config/event-handler'
+import {rheactorjsCommandHandler} from '../src/config/command-handler'
+import {rheactorjsEventHandler} from '../src/config/event-handler'
 import keys from '../src/services/keys'
 
 Promise.longStackTraces()
 
 const webConfig = {
   baseHref: '/',
-  mimeType: 'application/vnd.resourceful-humans.rheactor.v2+json'
+  mimeType: 'application/vnd.rheactorjs.core.v2+json'
 }
 
 // Event listening
@@ -44,8 +44,8 @@ const templateMailer = {
 }
 
 // Event handling
-rheactorCommandHandler(repositories, emitter, config, webConfig, templateMailer)
-rheactorEventHandler(repositories, emitter, config)
+rheactorjsCommandHandler(repositories, emitter, config, webConfig, templateMailer)
+rheactorjsEventHandler(repositories, emitter, config)
 
 // Password strength
 config.set('bcrypt_rounds', 1)

@@ -10,9 +10,9 @@ import {String as StringType} from 'tcomb'
  * @param {express.app} app
  * @returns {{sendHttpProblem: <function>}}
  */
-export const rheactorExpressBaseConfig = (environment, mimeType, app) => {
-  StringType(environment, ['rheactorServerExpressBaseConfiguration', 'environment:String'])
-  StringType(mimeType, ['rheactorServerExpressBaseConfiguration', 'mimeType:String'])
+export const rheactorjsExpressBaseConfig = (environment, mimeType, app) => {
+  StringType(environment, ['rheactorjsServerExpressBaseConfiguration', 'environment:String'])
+  StringType(mimeType, ['rheactorjsServerExpressBaseConfiguration', 'mimeType:String'])
 
   replaceWithFastURLParser()
 

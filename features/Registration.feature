@@ -3,8 +3,8 @@ Feature: Registration
 
   Background: Client defaults
 
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Accept header
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Content-Type header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Accept header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Content-Type header
 
   Scenario: Create Mike's account
 

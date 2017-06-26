@@ -4,15 +4,15 @@ Feature: User preferences
 
   Background: Client defaults
 
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Accept header
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Content-Type header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Accept header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Content-Type header
     Given "Bearer {token}" is the Authorization header
 
   Scenario: Initially, a profile should not have preferences
 
     When I GET {jwt.sub}
     Then the status code should be 200
-    And the Content-Type header should equal "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8"
+    And the Content-Type header should equal "application/vnd.rheactorjs.core.v2+json; charset=utf-8"
     And "$context" should equal "https://github.com/RHeactorJS/models#User"
     And "$id" should equal "{jwt.sub}"
     And "preferences" should equal "{}"

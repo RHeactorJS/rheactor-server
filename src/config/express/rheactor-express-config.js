@@ -4,7 +4,7 @@ import tokenBearerStrategy from './token-bearer-strategy'
 import JSONLD from '../jsonld'
 import {verify} from '../../util/tokens'
 import {transform} from '../../api/transformer'
-import {rheactorExpressBaseConfig} from './base'
+import {rheactorjsExpressBaseConfig} from './base'
 import {URIValue} from 'value-objects'
 import indexRoute from '../../api/route/index'
 import statusRoute from '../../api/route/status'
@@ -50,13 +50,13 @@ const chainedTokenParsers = tokenParsers => {
  * @param {JSONLD} jsonld
  * @param {Array.<Function>} tokenParsers
  */
-export function rheactorExpressConfig (app, config, webConfig, repositories, emitter, transformer = transform, jsonld = undefined, tokenParsers = []) {
+export function rheactorjsExpressConfig (app, config, webConfig, repositories, emitter, transformer = transform, jsonld = undefined, tokenParsers = []) {
   const apiHost = new URIValue(config.get('api_host'))
   if (!jsonld) {
     jsonld = JSONLD(apiHost)
   }
 
-  const base = rheactorExpressBaseConfig(config.get('environment'), webConfig.mimeType, app)
+  const base = rheactorjsExpressBaseConfig(config.get('environment'), webConfig.mimeType, app)
 
   app.use(passport.initialize())
 

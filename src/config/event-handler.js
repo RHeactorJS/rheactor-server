@@ -8,7 +8,7 @@ import NotifySlackAboutNewUsersEventHandler from '../event-handler/notify-slack-
  * @param {BackendEmitter} emitter
  * @param {nconf} config
  */
-export function rheactorEventHandler (repos, emitter, config) {
+export function rheactorjsEventHandler (repos, emitter, config) {
   let c = new EmittedEventsHandlerRegistry(emitter)
   SendEmailConfirmationEventHandler(repos.user)(c)
   let slackWebhook = config.get('slack:webhook')

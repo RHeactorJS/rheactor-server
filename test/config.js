@@ -10,7 +10,7 @@ let port = 8080
 nconf.defaults({
   'environment': 'testing',
   'version': '0.0.0',
-  'mime_type': 'application/vnd.resourceful-humans.rheactor.v2+json',
+  'mime_type': 'application/vnd.rheactorjs.core.v2+json',
   'port': port,
   'host': host,
   'api_host': 'http://' + host + ':' + port,

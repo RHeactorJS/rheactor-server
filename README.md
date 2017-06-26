@@ -7,7 +7,7 @@
 [![semantic-release](https://img.shields.io/badge/semver-semantic%20release-e10079.svg)](https://github.com/semantic-release/semantic-release)[![Test Coverage](https://codeclimate.com/github/RHeactorJS/server/badges/coverage.svg)](https://codeclimate.com/github/RHeactorJS/server/coverage)
 [![Code Climate](https://codeclimate.com/github/RHeactorJS/server/badges/gpa.svg)](https://codeclimate.com/github/RHeactorJS/server)
 
-Core server components for [RHeactor applications](https://github.com/RHeactor).
+Core server components for [RHeactorJS applications](https://github.com/RHeactorJS).
 
 The server provides typical business capabilities of a web application:
 
@@ -34,7 +34,7 @@ Transferred data always contains a `$context` which basically gives every object
 
 Authorization is done stateless using [JSON Web Token](https://jwt.io/). It is used in HTTP request through the `Authorization: Bearer …` header but also through sending users links containing tokens, e.g. [to reset their passwords](https://github.com/RHeactorJS/server/blob/937c60942727d2eba95c06787e735eb9281f6717/features/PasswordChange.feature#L27).
 
-The [RHeactor DeepDive](./DeepDive) explains how this works in detail.
+The [RHeactorJS DeepDive](./DeepDive) explains how this works in detail.
 
 ### REST HTTP Verbs
 
@@ -93,7 +93,7 @@ UIs still may chose to offer a *save* feature, they can simply create all necces
 
 > :information_source: Clients need to resolve conflicts
 
-[Aggregate versions](https://github.com/RHeactorJS/event-store#versioning) play an important part in the way state changes are implemented. The server will reject any update to an entity if the a wrong version number is [provided via the `If-Match` header](https://github.com/RHeactor/wiki/wiki/DeepDive#3-update-the-name). 
+[Aggregate versions](https://github.com/RHeactorJS/event-store#versioning) play an important part in the way state changes are implemented. The server will reject any update to an entity if the a wrong version number is [provided via the `If-Match` header](https://github.com/RHeactorJS/wiki/wiki/DeepDive#3-update-the-name). 
 
 Clients therefore need get hold of the latest version number in the server's data store. Usually this is done by *reading* the entity. All entites are instances of `AggregateRoots` or `ImmutableAggregateRoots` from the [`event-store`](https://github.com/RHeactorJS/event-store) package and provide the version number (an Integer > 0).
 
@@ -106,4 +106,4 @@ This aproach offers these advantags:
 
 That means for a client (and especially for UIs), that in 99% of user updates, everything will work fine, in the rare case of a conflict, it's far easier to ask the user to "reload the page" and have the user re-apply their changes, then merging changes from different updates.
 
-Nevertheless, for RHeactor applications, having real-time updates in the UI is a central feature, for which utilities have been implemented in [`web-app`](https://github.com/RHeactorJS/web-app#readme).
+Nevertheless, for RHeactorJS applications, having real-time updates in the UI is a central feature, for which utilities have been implemented in [`web-app`](https://github.com/RHeactorJS/web-app#readme).

@@ -6,7 +6,7 @@ import userUpdateConsoleCommand from './user-update'
 import usersConsoleCommand from './users'
 import {userCreateConsoleCommand} from './user-create'
 
-export const rheactorConsoleCommands = [
+export const rheactorjsConsoleCommands = [
   configureMailerConsoleCommand,
   sendEmailConfirmationConsoleCommand,
   sendLostPasswordMailConsoleCommand,

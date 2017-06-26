@@ -21,7 +21,7 @@ import UserSendEmailChangeConfirmationLinkHandler from '../command-handler/user-
  * @param {object} webConfig
  * @param {TemplateMailerClient} templateMailerClient
  */
-export function rheactorCommandHandler (repos, emitter, config, webConfig, templateMailerClient) {
+export function rheactorjsCommandHandler (repos, emitter, config, webConfig, templateMailerClient) {
   const c = new EmittedEventsHandlerRegistry(emitter)
 
   const registerHandler = (handler) => {

@@ -5,8 +5,8 @@ Feature: Email change
 
   Background: Client defaults
 
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Accept header
-    Given "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8" is the Content-Type header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Accept header
+    Given "application/vnd.rheactorjs.core.v2+json; charset=utf-8" is the Content-Type header
 
   Scenario: Change email address, which needs to be confirmed
 
@@ -50,6 +50,6 @@ Feature: Email change
     --------------
     When I PUT to {emailChangeEndpoint}
     Then the status code should be 409
-    And the Content-Type header should equal "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8"
+    And the Content-Type header should equal "application/vnd.rheactorjs.core.v2+json; charset=utf-8"
     And "$context" should equal "https://www.ietf.org/id/draft-ietf-appsawg-http-problem-01.txt"
     And "detail" should equal "ConflictError: Email address already in use: jane.doe-{time}@example.com"

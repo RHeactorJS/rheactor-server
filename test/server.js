@@ -1,5 +1,5 @@
 import backend from './backend'
-import {rheactorExpressConfig} from '../src/config/express/express-config'
+import {rheactorjsExpressConfig} from '../src/config/express/express-config'
 import express from 'express'
 
 const config = backend.config
@@ -11,7 +11,7 @@ const emitter = backend.emitter
 // HTTP API
 const app = express()
 app.set('env', 'test') // Suppress errors logged from express.js
-rheactorExpressConfig(app, config, webConfig, repositories, emitter)
+rheactorjsExpressConfig(app, config, webConfig, repositories, emitter)
 const port = config.get('port')
 const host = config.get('host')
 app.listen(port, host)
