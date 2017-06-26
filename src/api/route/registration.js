@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import {EmailValue} from 'value-objects'
+import {EmailValue} from '@rheactorjs/value-objects'
 import {CreateUserCommand} from '../../command/user/create'
 import {ValidationFailedError, ConflictError} from '@rheactorjs/errors'
 import bcrypt from 'bcrypt'

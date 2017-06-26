@@ -1,4 +1,4 @@
-import {User} from 'models'
+import {User} from '@rheactorjs/models'
 import {JSONLDType} from './jsonld'
 import {AggregateRootType} from 'event-store'
 import {UserModelType} from '../model/user'

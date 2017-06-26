@@ -1,7 +1,7 @@
 import SendUserEmailChangeConfirmationLinkCommand from '../command/user/send-email-change-confirmation-link'
 import {UserEmailChangeConfirmationLinkSentEvent} from '../event/user'
 import {changeEmailToken} from '../util/tokens'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 /**
  * Send a email reset token if requested

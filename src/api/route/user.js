@@ -5,8 +5,8 @@ import Joi from 'joi'
 import _merge from 'lodash/merge'
 import {Pagination} from '../../util/pagination'
 import {sendPaginatedListResponse} from '../pagination'
-import {URIValue, EmailValue} from 'value-objects'
-import {User} from 'models'
+import {URIValue, EmailValue} from '@rheactorjs/value-objects'
+import {User} from '@rheactorjs/models'
 import verifySuperUser from '../verify-superuser'
 
 /**

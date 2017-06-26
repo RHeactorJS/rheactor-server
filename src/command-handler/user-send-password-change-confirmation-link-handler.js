@@ -1,7 +1,7 @@
 import SendUserPasswordChangeConfirmationLinkCommand from '../command/user/send-password-change-confirmation-link'
 import {UserPasswordChangeConfirmationLinkSentEvent} from '../event/user'
 import {lostPasswordToken} from '../util/tokens'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 /**
  * Send a password reset token if requested

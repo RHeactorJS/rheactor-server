@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import {EmailValue} from 'value-objects'
+import {EmailValue} from '@rheactorjs/value-objects'
 import SendUserPasswordChangeConfirmationLinkCommand from '../../command/user/send-password-change-confirmation-link'
 import ChangeUserPasswordCommand from '../../command/user/password-change'
 import {isLostPasswordToken} from '../../util/tokens'

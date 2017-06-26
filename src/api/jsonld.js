@@ -1,5 +1,5 @@
-import {Link, LinkType, Index} from 'models'
-import {URIValue, URIValueType} from 'value-objects'
+import {Link, LinkType, Index} from '@rheactorjs/models'
+import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {dict, String as StringType, irreducible} from 'tcomb'
 import {AggregateIdType} from 'event-store'
 import {ValidationFailedError} from '@rheactorjs/errors'

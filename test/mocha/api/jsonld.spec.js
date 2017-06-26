@@ -2,8 +2,8 @@
 
 import {expect} from 'chai'
 import {JSONLD} from '../../../src/api/jsonld'
-import {URIValue} from 'value-objects'
-import {Link} from 'models'
+import {URIValue} from '@rheactorjs/value-objects'
+import {Link} from '@rheactorjs/models'
 
 const UserContext = new URIValue('https://github.com/RHeactorJS/models#User')
 const UserTaskContext = new URIValue('https://github.com/RHeactorJS/models#UserTask')

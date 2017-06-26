@@ -1,8 +1,8 @@
 import Promise from 'bluebird'
 import jwt from 'jsonwebtoken'
-import {User, JsonWebToken, JsonWebTokenType} from 'models'
+import {User, JsonWebToken, JsonWebTokenType} from '@rheactorjs/models'
 import JSONLD from '../config/jsonld'
-import {URIValue, URIValueType} from 'value-objects'
+import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {Object as ObjectType, Integer as IntegerType, String as StringType} from 'tcomb'
 import {UserModelType} from '../model/user'
 

@@ -1,7 +1,7 @@
 import {AggregateRepository, AggregateIndex, ModelEvent, ModelEventType} from 'event-store'
 import {UserModel, UserModelType, MaybeUserModelType} from '../model/user'
 import {EntryNotFoundError} from '@rheactorjs/errors'
-import {EmailValueType} from 'value-objects'
+import {EmailValueType} from '@rheactorjs/value-objects'
 import Promise from 'bluebird'
 import {UserCreatedEvent, UserEmailChangedEvent} from '../event/user'
 import {PaginationType} from '../util/pagination'

@@ -1,8 +1,8 @@
 import Promise from 'bluebird'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {User, JsonWebToken} from 'models'
-import {EmailValue} from 'value-objects'
+import {User, JsonWebToken} from '@rheactorjs/models'
+import {EmailValue} from '@rheactorjs/value-objects'
 import {AccessDeniedError, ValidationFailedError} from '@rheactorjs/errors'
 import Joi from 'joi'
 Promise.promisifyAll(bcrypt)

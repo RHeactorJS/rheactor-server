@@ -1,5 +1,5 @@
 import {UserModelType} from '../../model/user'
-import {URIValueType} from 'value-objects'
+import {URIValueType} from '@rheactorjs/value-objects'
 
 /**
  * @param {UserModel} user

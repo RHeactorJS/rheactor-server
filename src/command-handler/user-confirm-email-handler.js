@@ -1,7 +1,7 @@
 import ConfirmUserEmailCommand from '../command/user/confirm-email'
 import {UserActivationLinkSentEvent} from '../event/user'
 import {accountActivationToken} from '../util/tokens'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 /**
  * Send an email confirmation mail to the user
