@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import TemplateMailerClient from 'template-mailer-aws-lambda-client'
-import emails from 'transactional-emails'
+import {emails} from '../services/emails'
 
 export default {
   name: 'configure-mailer',
