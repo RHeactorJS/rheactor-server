@@ -1,7 +1,7 @@
 # server
 
-[![Build Status](https://travis-ci.org/RHeactorJS/server.svg?branch=master)](https://travis-ci.org/RHeactorJS/server)
 [![npm version](https://img.shields.io/npm/v/@rheactorjs/server.svg)](https://www.npmjs.com/package/@rheactorjs/server)
+[![Build Status](https://travis-ci.org/RHeactorJS/server.svg?branch=master)](https://travis-ci.org/RHeactorJS/server)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/semver-semantic%20release-e10079.svg)](https://github.com/semantic-release/semantic-release)[![Test Coverage](https://codeclimate.com/github/RHeactorJS/server/badges/coverage.svg)](https://codeclimate.com/github/RHeactorJS/server/coverage)
