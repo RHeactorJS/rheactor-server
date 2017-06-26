@@ -19,9 +19,10 @@ services:
 before_install:
   - npm install -g npm-install-peers
 install:
+  - npm prune
   - npm install
   - npm-install-peers
-  - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server
+  - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server; cd ../..
 script:
   - npm run lint
   - make dist
