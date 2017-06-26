@@ -2,7 +2,7 @@
 
 import {BackendEmitter} from '../../../src/services/emitter'
 import {expect} from 'chai'
-import {ModelEvent} from 'rheactor-event-store'
+import {ModelEvent} from 'event-store'
 
 describe('BackendEmitter', () => {
   it('should emit ModelEvents with their names', done => {

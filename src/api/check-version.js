@@ -1,5 +1,5 @@
-import {ValidationFailedError, ConflictError} from '@resourcefulhumans/rheactor-errors'
-import {AggregateRootType, ImmutableAggregateRootType} from 'rheactor-event-store'
+import {ValidationFailedError, ConflictError} from '@rheactorjs/errors'
+import {AggregateRootType, ImmutableAggregateRootType} from 'event-store'
 import {PositiveIntegerType} from '../util/pagination'
 
 /**

@@ -5,7 +5,7 @@ import JSONLD from '../jsonld'
 import {verify} from '../../util/tokens'
 import {transform} from '../../api/transformer'
 import {rheactorExpressBaseConfig} from './base'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import indexRoute from '../../api/route/index'
 import statusRoute from '../../api/route/status'
 import registrationRoute from '../../api/route/registration'
@@ -23,7 +23,7 @@ import userRoute from '../../api/route/user'
  * if not it should call the provided next() method to let the next
  * parser have a go at the token.
  *
- * The last parser is always the default token parser from rheactor-server.
+ * The last parser is always the default token parser from server.
  *
  * @param {Array.<function(String, function, function)>} tokenParsers
  * @returns {function(String, function)}

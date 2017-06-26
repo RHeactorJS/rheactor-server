@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 
 let schema = Joi.object().keys({
   items: Joi.array().required(),

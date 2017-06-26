@@ -1,8 +1,8 @@
 import Promise from 'bluebird'
 import jwt from 'jsonwebtoken'
 import JsonWebTokenError from 'jsonwebtoken/lib/JsonWebTokenError'
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
-import {JsonWebToken, User} from 'rheactor-models'
+import {ValidationFailedError} from '@rheactorjs/errors'
+import {JsonWebToken, User} from 'models'
 import Joi from 'joi'
 
 export const tokenRoutes = (app, config, tokenAuth, jsonld, sendHttpProblem) => {

@@ -1,6 +1,6 @@
 import {UserModelType} from '../model/user'
-import {EmailValueType} from 'rheactor-value-objects'
-import {JsonWebTokenType} from 'rheactor-models'
+import {EmailValueType} from 'value-objects'
+import {JsonWebTokenType} from 'models'
 
 export const UserActivatedEvent = 'UserActivatedEvent'
 export const UserDeactivatedEvent = 'UserDeactivatedEvent'

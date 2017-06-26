@@ -1,5 +1,5 @@
 import {CreateUserCommand} from '../command/user/create'
-import {EmailValue} from 'rheactor-value-objects'
+import {EmailValue} from 'value-objects'
 import Promise from 'bluebird'
 import bcrypt from 'bcrypt'
 Promise.promisifyAll(bcrypt)

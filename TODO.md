@@ -8,7 +8,7 @@ At some point it might be feasable to introduce a cache that stores snapshots of
 
 ### Process backend events asynchronously
 
-The current implementation of e.g. [changing the users last name](https://github.com/ResourcefulHumans/rheactor-server/blob/2f9145f2fd2c552a1ecfcfaa9d5892482b30f8f1/src/api/route/profile.js#L165) **expects** that the backend processes the update immediately, and returns only after ther user entity has been modified. This style of processing updates to entities can become a bottleneck in the future and is discouraged. This section should be refactord to immediately return an empty response:
+The current implementation of e.g. [changing the users last name](https://github.com/RHeactorJS/server/blob/2f9145f2fd2c552a1ecfcfaa9d5892482b30f8f1/src/api/route/profile.js#L165) **expects** that the backend processes the update immediately, and returns only after ther user entity has been modified. This style of processing updates to entities can become a bottleneck in the future and is discouraged. This section should be refactord to immediately return an empty response:
 
 ```javascript
 emitter.emit(cmd)

@@ -31,7 +31,7 @@ export const rheactorExpressBaseConfig = (environment, mimeType, app) => {
       'location',
       'x-made-by',
       'x-github',
-      'x-rheactor-app'
+      'x-app'
     ]
   }))
 

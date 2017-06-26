@@ -1,6 +1,6 @@
 import {MaybeUserModelType} from '../../model/user'
 import {Boolean as BooleanType, String as StringType} from 'tcomb'
-import {EmailValueType} from 'rheactor-value-objects'
+import {EmailValueType} from 'value-objects'
 
 export class CreateUserCommand {
   /**

@@ -1,5 +1,5 @@
 import {EmittedEventsHandlerRegistry} from '../services/emitted-events-handler-registry'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import SendEmailConfirmationEventHandler from '../event-handler/send-email-confirmation'
 import NotifySlackAboutNewUsersEventHandler from '../event-handler/notify-slack-about-new-users'
 

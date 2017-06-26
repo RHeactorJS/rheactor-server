@@ -1,5 +1,5 @@
 import ChangeUserEmailCommand from '../../../command/user/email-change'
-import {ConflictError} from '@resourcefulhumans/rheactor-errors'
+import {ConflictError} from '@rheactorjs/errors'
 
 export default {
   command: ChangeUserEmailCommand,

@@ -2,8 +2,8 @@
 
 import {expect} from 'chai'
 import {checkVersionImmutable} from '../../../src/api/check-version'
-import {ImmutableAggregateRoot, AggregateMeta} from 'rheactor-event-store'
-import {ConflictError} from '@resourcefulhumans/rheactor-errors'
+import {ImmutableAggregateRoot, AggregateMeta} from 'event-store'
+import {ConflictError} from '@rheactorjs/errors'
 
 describe('checkVersionImmutable', () => {
   it('should throw an ConflictError if version is lower then model version', () => {

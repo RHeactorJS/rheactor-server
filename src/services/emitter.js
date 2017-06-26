@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events'
 import _snakeCase from 'lodash/snakeCase'
 import Promise from 'bluebird'
-import {ModelEvent} from 'rheactor-event-store'
+import {ModelEvent} from 'event-store'
 
 export class BackendEmitter extends EventEmitter {
   toEventName (cmdOrEvent) {

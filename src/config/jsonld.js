@@ -1,6 +1,6 @@
-import {User, Status, JsonWebToken, Link} from 'rheactor-models'
+import {User, Status, JsonWebToken, Link} from 'models'
 import {JSONLD} from '../api/jsonld'
-import {URIValue, URIValueType} from 'rheactor-value-objects'
+import {URIValue, URIValueType} from 'value-objects'
 
 /**
  * @param {URIValue} apiHost

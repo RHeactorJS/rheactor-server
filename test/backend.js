@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import {EntryAlreadyExistsError, EntryNotFoundError} from '@resourcefulhumans/rheactor-errors'
+import {EntryAlreadyExistsError, EntryNotFoundError} from '@rheactorjs/errors'
 import config from './config'
 import emitter from '../src/services/emitter'
 import {RedisConnection} from '../src/services/redis-connection'

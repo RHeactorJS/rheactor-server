@@ -1,5 +1,5 @@
 import {UserModelType} from '../../model/user'
-import {EmailValueType} from 'rheactor-value-objects'
+import {EmailValueType} from 'value-objects'
 
 /**
  * @param {UserModel} user

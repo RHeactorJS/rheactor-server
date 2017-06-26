@@ -13,7 +13,7 @@ Feature: User preferences
     When I GET {jwt.sub}
     Then the status code should be 200
     And the Content-Type header should equal "application/vnd.resourceful-humans.rheactor.v2+json; charset=utf-8"
-    And "$context" should equal "https://github.com/ResourcefulHumans/rheactor-models#User"
+    And "$context" should equal "https://github.com/RHeactorJS/models#User"
     And "$id" should equal "{jwt.sub}"
     And "preferences" should equal "{}"
     And I store the link to "update-preferences" as "updatePreferences"

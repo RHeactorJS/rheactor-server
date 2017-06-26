@@ -1,10 +1,10 @@
 import Promise from 'bluebird'
-import {EmailValue} from 'rheactor-value-objects'
+import {EmailValue} from 'value-objects'
 import SendUserPasswordChangeConfirmationLinkCommand from '../../command/user/send-password-change-confirmation-link'
 import ChangeUserPasswordCommand from '../../command/user/password-change'
 import {isLostPasswordToken} from '../../util/tokens'
 import bcrypt from 'bcrypt'
-import {ValidationFailedError, AccessDeniedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError, AccessDeniedError} from '@rheactorjs/errors'
 import Joi from 'joi'
 import {checkVersion} from '../check-version'
 Promise.promisifyAll(bcrypt)

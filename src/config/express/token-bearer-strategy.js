@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import JsonWebTokenError from 'jsonwebtoken/lib/JsonWebTokenError'
-import {TokenExpiredError} from '@resourcefulhumans/rheactor-errors'
+import {TokenExpiredError} from '@rheactorjs/errors'
 
 export default (verifyToken) => {
   return (token, cb) => {

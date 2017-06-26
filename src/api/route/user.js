@@ -1,12 +1,12 @@
 import Promise from 'bluebird'
 import {CreateUserCommand} from '../../command/user/create'
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import Joi from 'joi'
 import _merge from 'lodash/merge'
 import {Pagination} from '../../util/pagination'
 import {sendPaginatedListResponse} from '../pagination'
-import {URIValue, EmailValue} from 'rheactor-value-objects'
-import {User} from 'rheactor-models'
+import {URIValue, EmailValue} from 'value-objects'
+import {User} from 'models'
 import verifySuperUser from '../verify-superuser'
 
 /**

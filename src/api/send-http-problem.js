@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import {HttpProblem} from 'rheactor-models'
+import {HttpProblem} from 'models'
 import {
   AccessDeniedError,
   EntryNotFoundError,
@@ -8,8 +8,8 @@ import {
   ValidationFailedError,
   EntryDeletedError,
   PaymentRequiredError
-} from '@resourcefulhumans/rheactor-errors'
-import {URIValue} from 'rheactor-value-objects'
+} from '@rheactorjs/errors'
+import {URIValue} from 'value-objects'
 
 export const HttpProblemFromException = (exception, status) => {
   if (HttpProblem.is(exception)) return exception

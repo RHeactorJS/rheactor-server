@@ -1,5 +1,5 @@
 import UpdateUserPropertyCommand from '../../../command/user/update-property'
-import {ApplicationError} from '@resourcefulhumans/rheactor-errors'
+import {ApplicationError} from '@rheactorjs/errors'
 
 export default {
   command: UpdateUserPropertyCommand,

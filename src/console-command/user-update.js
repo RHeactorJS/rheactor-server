@@ -4,7 +4,7 @@ import DeactivateUserCommand from '../command/user/deactivate'
 import ActivateUserCommand from '../command/user/activate'
 import {GrantSuperUserPermissionsCommand} from '../command/user/grant-superuser-permissions'
 import RevokeSuperUserPermissionCommand from '../command/user/revoke-superuser-permissions'
-import {URIValue, EmailValue} from 'rheactor-value-objects'
+import {URIValue, EmailValue} from 'value-objects'
 import Promise from 'bluebird'
 
 export default {

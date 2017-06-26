@@ -22,7 +22,7 @@ install:
   - npm prune
   - npm install
   - npm-install-peers
-  - cd node_modules; ln -s ../ rheactor-server; cd ..
+  - cd node_modules; ln -s ../ server; cd ..
 script:
   - npm run lint
   - make dist

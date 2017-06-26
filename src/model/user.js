@@ -1,7 +1,7 @@
-import {ModelEvent, AggregateRoot} from 'rheactor-event-store'
-import {ValidationFailedError, ConflictError, UnhandledDomainEventError} from '@resourcefulhumans/rheactor-errors'
+import {ModelEvent, AggregateRoot} from 'event-store'
+import {ValidationFailedError, ConflictError, UnhandledDomainEventError} from '@rheactorjs/errors'
 import {String as StringType, Any as AnyType, Boolean as BooleanType, irreducible, maybe, dict} from 'tcomb'
-import {URIValue, URIValueType, MaybeURIValueType, EmailValue, EmailValueType} from 'rheactor-value-objects'
+import {URIValue, URIValueType, MaybeURIValueType, EmailValue, EmailValueType} from 'value-objects'
 import {SuperUserPermissionsGrantedEvent, UserPropertyChangedEvent, UserPreferencesChangedEvent, UserAvatarUpdatedEvent, UserActivatedEvent, UserDeactivatedEvent, UserEmailChangedEvent, UserCreatedEvent, UserPasswordChangedEvent, SuperUserPermissionsRevokedEvent} from '../event/user'
 const PreferencesType = dict(StringType, AnyType)
 

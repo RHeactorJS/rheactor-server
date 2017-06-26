@@ -1,4 +1,4 @@
-import {Status} from 'rheactor-models'
+import {Status} from 'models'
 
 export default function (app, config) {
   app.get('/api/status', function (req, res) {

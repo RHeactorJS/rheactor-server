@@ -4,9 +4,9 @@ import Promise from 'bluebird'
 import helper from '../helper'
 import {expect} from 'chai'
 import {CreateUserCommand} from '../../../src/command/user/create'
-import {EmailValue} from 'rheactor-value-objects'
+import {EmailValue} from 'value-objects'
 import {UserModel} from '../../../src/model/user'
-import {ModelEvent} from 'rheactor-event-store'
+import {ModelEvent} from 'event-store'
 import emitter from '../../../src/services/emitter'
 
 describe('UserRepository', function () {

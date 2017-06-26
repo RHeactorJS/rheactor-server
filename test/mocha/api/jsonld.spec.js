@@ -2,11 +2,11 @@
 
 import {expect} from 'chai'
 import {JSONLD} from '../../../src/api/jsonld'
-import {URIValue} from 'rheactor-value-objects'
-import {Link} from 'rheactor-models'
+import {URIValue} from 'value-objects'
+import {Link} from 'models'
 
-const UserContext = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#User')
-const UserTaskContext = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#UserTask')
+const UserContext = new URIValue('https://github.com/RHeactorJS/models#User')
+const UserTaskContext = new URIValue('https://github.com/RHeactorJS/models#UserTask')
 const ContributionContext = new URIValue('https://github.com/ResourcefulHumans/netwoRHk/wiki/JsonLD#Contribution')
 const CommitmentContext = new URIValue('https://github.com/ResourcefulHumans/netwoRHk/wiki/JsonLD#Commitment')
 const NetworhkContext = new URIValue('https://github.com/ResourcefulHumans/netwoRHk/wiki/JsonLD#netwoRHk')

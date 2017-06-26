@@ -1,4 +1,4 @@
-import {AccessDeniedError} from '@resourcefulhumans/rheactor-errors'
+import {AccessDeniedError} from '@rheactorjs/errors'
 
 export default (req, userRepo) => userRepo.getById(req.user)
   .then(admin => {

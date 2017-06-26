@@ -1,5 +1,5 @@
 import backend from './backend'
-import {rheactorExpressConfig} from '../src/config/express/rheactor-express-config'
+import {rheactorExpressConfig} from '../src/config/express/express-config'
 import express from 'express'
 
 const config = backend.config

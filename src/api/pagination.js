@@ -1,7 +1,7 @@
-import {Link, List} from 'rheactor-models'
+import {Link, List} from 'models'
 import url from 'fast-url-parser'
 import Promise from 'bluebird'
-import {URIValue, URIValueType} from 'rheactor-value-objects'
+import {URIValue, URIValueType} from 'value-objects'
 import {PaginatedResultType} from '../model/paginated-result'
 import {Object as ObjectType, Function as FunctionType} from 'tcomb'
 
