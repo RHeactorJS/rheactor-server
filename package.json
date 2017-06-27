@@ -4,6 +4,7 @@
   "version": "0.0.0-development",
   "scripts": {
     "lint": "standard",
+    "dev-server": "environment=development nodemon --exec babel-node -e js -w ./src -d 1 test/server.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "environment=testing mocha --compilers js:babel-register --reporter=dot --timeout=5000 test/\\*\\*/\\*.js",
     "test:api": "environment=testing mocha --compilers js:babel-register --reporter=dot --timeout=5000 test/yadda/\\*\\*/\\*.js",
@@ -66,6 +67,7 @@
     "juice": "^4.0.2",
     "lolex": "^1.6.0",
     "mocha": "^3.0.2",
+    "nodemon": "^1.11.0",
     "nyc": "^10.2.0",
     "semantic-release": "^6.3.2",
     "showdown": "^1.6.4",
@@ -81,7 +83,6 @@
     "features",
     "README.md"
   ],
-  "main": "dist/index.js",
   "engines": {
     "node": ">=6.10.2"
   }
