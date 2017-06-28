@@ -83,6 +83,7 @@
     "features",
     "README.md"
   ],
+  "main": "dist/index.js",
   "engines": {
     "node": ">=6.10.2"
   }
