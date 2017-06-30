@@ -14,7 +14,7 @@ nconf.defaults({
   'port': port,
   'host': host,
   'api_host': 'http://' + host + ':' + port,
-  'web_host': 'http://' + host + ':' + port,
+  'web_host': 'http://' + host + ':8081',
   'base_href': '/',
   'deploy_time': +new Date(),
   'app': process.env.npm_package_name,
@@ -31,7 +31,9 @@ nconf.defaults({
   'public_key': null,
   'bcrypt_rounds': 14,
   'template_mailer': {
-    'transport': 'server'
+    'transport': 'server',
+    'template_prefix': 'server-',
+    'password_change_template': 'password-change'
   },
   'trustedAvatarURL': '^https://example.com/.+'
 })

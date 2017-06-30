@@ -29,7 +29,7 @@ export default (templateMailerClient, config, webConfig) => {
                   firstname: cmd.user.firstname,
                   lastname: cmd.user.lastname
                 },
-                link: config.get('web_host') + webConfig.baseHref + '#!/activate/' + token.token,
+                link: (new URIValue(config.get('web_host') + webConfig.baseHref).slashless()) + '/activate/' + token.token,
                 baseHref: webConfig.baseHref,
                 webHost: config.get('web_host')
               })
