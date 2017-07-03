@@ -33,7 +33,8 @@ nconf.defaults({
   'template_mailer': {
     'transport': 'server',
     'template_prefix': 'server-',
-    'password_change_template': 'password-change'
+    'password_change_template': 'password-change',
+    'email_verification_template': 'email-verification'
   },
   'trustedAvatarURL': '^https://example.com/.+'
 })
