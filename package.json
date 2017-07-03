@@ -27,7 +27,7 @@
     "url": "https://github.com/RHeactorJS/server/issues"
   },
   "homepage": "https://github.com/RHeactorJS/server#readme",
-  "peerDependencies": {
+  "dependencies": {
     "@rheactorjs/bdd-contexts": "1.x",
     "@rheactorjs/errors": "1.x",
     "@rheactorjs/event-store": "1.x",
