@@ -15,7 +15,7 @@ notifications:
   email: false
 services:
   - redis-server
-pre_install:
+before_install:
   - npm install node-pre-gyp
 install:
   - npm prune
