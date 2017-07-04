@@ -18,8 +18,8 @@ services:
 before_install:
   - npm install node-pre-gyp
 install:
-  - npm prune
   - npm install
+  - npm prune
   - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server; cd ../../
 script:
   - npm run lint
