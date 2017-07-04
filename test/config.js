@@ -34,7 +34,8 @@ nconf.defaults({
     'transport': 'server',
     'template_prefix': 'server-',
     'password_change_template': 'password-change',
-    'email_verification_template': 'email-verification'
+    'email_verification_template': 'email-verification',
+    'email_change_template': 'email-change'
   },
   'trustedAvatarURL': '^https://example.com/.+'
 })
