@@ -46,7 +46,7 @@ export default (app, config, userRepository, jsonld, sendHttpProblem) => {
                       {
                         algorithm: 'RS256',
                         issuer: 'login',
-                        subject: jsonld.createId(User.$context, user.aggregateId()).toString(),
+                        subject: jsonld.createId(User.$context, user.meta.id).toString(),
                         expiresIn: config.get('token_lifetime')
                       }
                     )

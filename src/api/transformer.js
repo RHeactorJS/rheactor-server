@@ -1,6 +1,6 @@
 import {User} from '@rheactorjs/models'
 import {JSONLDType} from './jsonld'
-import {AggregateRootType} from '@rheactorjs/event-store'
+import {ImmutableAggregateRootType} from '@rheactorjs/event-store'
 import {UserModelType} from '../model/user'
 
 /**
@@ -9,7 +9,7 @@ import {UserModelType} from '../model/user'
  */
 export function transform (jsonld, model) {
   JSONLDType(jsonld)
-  AggregateRootType(model)
+  ImmutableAggregateRootType(model)
   switch (model.constructor.name) {
     case 'UserModel':
       return userTransformer(model, jsonld)
@@ -20,12 +20,12 @@ export const userTransformer = (user, jsonld) => {
   UserModelType(user)
   JSONLDType(jsonld)
   return new User({
-    $id: jsonld.createId(User.$context, user.aggregateId()),
-    $version: user.aggregateVersion(),
-    $links: jsonld.createLinks(User.$context, user.aggregateId()),
-    $createdAt: user.createdAt(),
-    $updatedAt: user.updatedAt(),
-    $deletedAt: user.deletedAt(),
+    $id: jsonld.createId(User.$context, user.meta.id),
+    $version: user.meta.version,
+    $links: jsonld.createLinks(User.$context, user.meta.id),
+    $createdAt: user.meta.createdAt,
+    $updatedAt: user.meta.updatedAt,
+    $deletedAt: user.meta.deletedAt,
     firstname: user.firstname,
     lastname: user.lastname,
     email: user.email,

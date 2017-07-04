@@ -4,7 +4,7 @@ import SendEmailConfirmationEventHandler from '../event-handler/send-email-confi
 import NotifySlackAboutNewUsersEventHandler from '../event-handler/notify-slack-about-new-users'
 
 /**
- * @param {Array.<AggregateRepository>} repos
+ * @param {Array.<ImmutableAggregateRepository>} repos
  * @param {BackendEmitter} emitter
  * @param {nconf} config
  */

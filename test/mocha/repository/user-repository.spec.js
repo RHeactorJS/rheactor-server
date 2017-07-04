@@ -43,9 +43,9 @@ describe('UserRepository', function () {
             )
             .spread((u1, u2) => {
               expect(u1.email.toString()).to.equal('john.doe@example.invalid')
-              expect(u1.aggregateVersion()).to.equal(1)
+              expect(u1.meta.version).to.equal(1)
               expect(u2.email.toString()).to.equal('jane.doe@example.invalid')
-              expect(u2.aggregateVersion()).to.equal(1)
+              expect(u2.meta.version).to.equal(1)
               done()
             })
         })
@@ -73,7 +73,7 @@ describe('UserRepository', function () {
       let email = new EmailValue('john.doe@example.invalid')
       findByEmailRetry(email)
         .then((user) => {
-          return repository.getById(user.aggregateId())
+          return repository.getById(user.meta.id)
         })
         .then((user) => {
           expect(user).to.be.instanceof(UserModel)
@@ -87,7 +87,7 @@ describe('UserRepository', function () {
       let email = new EmailValue('john.doe@example.invalid')
       findByEmailRetry(email)
         .then((user) => {
-          return repository.findById(user.aggregateId())
+          return repository.findById(user.meta.id)
         })
         .then((user) => {
           expect(user).to.be.instanceof(UserModel)

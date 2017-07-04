@@ -20,9 +20,8 @@ Feature: Avatar change
     "value": "https://example.com/example.jpg"
     --------------
     When I PUT to {avatarChangeEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "6"
-    And the Last-Modified header should be now
+    Then the status code should be 202
+    # Avatar is changed
     Given the request body is empty
     When I GET {jwt.sub}
     Then the status code should be 200

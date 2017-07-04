@@ -32,16 +32,6 @@ export class PaginatedResult {
     Object.defineProperty(this, 'prevOffset', {value: prevOffset, enumerable: true})
     Object.defineProperty(this, 'nextOffset', {value: nextOffset, enumerable: true})
   }
-
-  /**
-   * Returns true if x is of type PaginatedResult
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof PaginatedResult) || (x && x.constructor && x.constructor.name === PaginatedResult.name && 'items' in x && 'total' in x && 'itemsPerPage' in x && 'offset' in x && 'query' in x && 'prevOffset' in x && 'nextOffset' in x)
-  }
 }
 
-export const PaginatedResultType = irreducible('PaginatedResultType', PaginatedResult.is)
+export const PaginatedResultType = irreducible('PaginatedResultType', x => x instanceof PaginatedResult)

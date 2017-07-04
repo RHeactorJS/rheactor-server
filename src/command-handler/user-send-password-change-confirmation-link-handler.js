@@ -24,7 +24,7 @@ export default (templateMailerClient, config, webConfig) => {
         return lostPasswordToken(new URIValue(config.get('api_host')), config.get('private_key'), config.get('token_lifetime'), cmd.user)
           .then((token) => {
             return templateMailerClient
-              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['password_change_template'], cmd.user.email.toString(), cmd.user.name(), {
+              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['password_change_template'], cmd.user.email.toString(), cmd.user.name, {
                 recipient: {
                   firstname: cmd.user.firstname,
                   lastname: cmd.user.lastname

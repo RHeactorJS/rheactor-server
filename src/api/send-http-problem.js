@@ -12,7 +12,7 @@ import {
 import {URIValue} from '@rheactorjs/value-objects'
 
 export const HttpProblemFromException = (exception, status) => {
-  if (HttpProblem.is(exception)) return exception
+  if (exception instanceof HttpProblem) return exception
   const url = 'https://github.com/RHeactorJS/nucleus/wiki/HttpProblem#' +
     status +
     '?title=' + encodeURIComponent(exception.name) +

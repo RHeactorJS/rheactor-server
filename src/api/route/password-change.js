@@ -6,7 +6,7 @@ import {isLostPasswordToken} from '../../util/tokens'
 import bcrypt from 'bcrypt'
 import {ValidationFailedError, AccessDeniedError} from '@rheactorjs/errors'
 import Joi from 'joi'
-import {checkVersion} from '../check-version'
+import {checkVersionImmutable} from '../check-version'
 Promise.promisifyAll(bcrypt)
 
 /**
@@ -65,7 +65,7 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
           }
           return userRepository.getById(req.user)
             .then((user) => {
-              checkVersion(req.authInfo.payload['$aggregateMeta'][user.constructor.name].version, user)
+              checkVersionImmutable(req.authInfo.payload['meta'].version, user)
               return bcrypt
                 .genSaltAsync(config.get('bcrypt_rounds'))
                 .then(bcrypt.hashAsync.bind(bcrypt, data.password))

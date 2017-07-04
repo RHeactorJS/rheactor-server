@@ -50,13 +50,7 @@ Feature: SuperUsers
     "lastname": "Fischer"
     --------------
     When I POST to {createUserEndpoint}
-    Then the status code should be 201
-    # Fetch the user
-    When I follow the redirect
-    Then the status code should be 200
-    And the Content-Type header should equal "application/vnd.rheactorjs.core.v2+json; charset=utf-8"
-    And "$context" should equal "https://github.com/RHeactorJS/models#User"
-    And "email" should equal "heiko.fischer-{time}@example.com"
+    Then the status code should be 202
     # Try login as new user
     Given the Authorization header is empty
     And this is the request body
@@ -137,9 +131,7 @@ Feature: SuperUsers
     "value": true
     --------------
     When I PUT to {activateUserEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "2"
-    And the Last-Modified header should be now
+    Then the status code should be 202
     # Now the user can log-in
     Given the Authorization header is empty
     And this is the request body
@@ -157,7 +149,7 @@ Feature: SuperUsers
     "value": false
     --------------
     When I PUT to {activateUserEndpoint}
-    Then the status code should be 204
+    Then the status code should be 202
     # Now the user can't log-in
     Given the Authorization header is empty
     And this is the request body
@@ -196,9 +188,7 @@ Feature: SuperUsers
     "value": "superuser.changed.email-change-test-{time}@example.com"
     --------------
     When I PUT to {changeUserEmailEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "2"
-    And the Last-Modified header should be now
+    Then the status code should be 202
     # Search for the changed user
     Given "Bearer {angelasToken}" is the Authorization header
     And this is the request body
@@ -261,9 +251,7 @@ Feature: SuperUsers
     "value": "Mike W."
     --------------
     When I PUT to {changeUserFirstnameEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "2"
-    And the Last-Modified header should be now
+    Then the status code should be 202
     # Change its last name
     Given "2" is the If-Match header
     And this is the request body
@@ -271,9 +259,7 @@ Feature: SuperUsers
     "value": "Doey"
     --------------
     When I PUT to {changeUserLastnameEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "3"
-    And the Last-Modified header should be now
+    Then the status code should be 202
     # Search for the changed user
     Given "Bearer {angelasToken}" is the Authorization header
     And this is the request body

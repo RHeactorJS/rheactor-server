@@ -26,7 +26,7 @@ export default (webhookURI, appName, userRepo) => {
               uri: webhookURI.toString(),
               body: {
                 username: appName,
-                text: ':rocket: ' + user.name() + ' ' + user.email.toString() + ' just confirmed their account!'
+                text: ':rocket: ' + user.name + ' ' + user.email.toString() + ' just confirmed their account!'
               },
               json: true,
               transform: () => {

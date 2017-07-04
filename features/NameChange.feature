@@ -22,6 +22,9 @@ Feature: Name change
     "value": "Mike W."
     --------------
     When I PUT to {firstnameChangeEndpoint}
-    Then the status code should be 204
-    And the etag header should equal "5"
-    And the Last-Modified header should be now
+    Then the status code should be 202
+    # The name is changed
+    Given "Bearer {token}" is the Authorization header
+    When I GET {jwt.sub}
+    Then the status code should be 200
+    And "firstname" should equal "Mike W."

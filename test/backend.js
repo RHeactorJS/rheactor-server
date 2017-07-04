@@ -20,7 +20,7 @@ const webConfig = {
 
 // Event listening
 emitter.on('error', (err) => {
-  if (EntryNotFoundError.is(err) || EntryAlreadyExistsError.is(err)) {
+  if (err instanceof EntryNotFoundError || err instanceof EntryAlreadyExistsError) {
     return
   }
   throw err

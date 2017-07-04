@@ -1,9 +1,10 @@
 /* global describe, it, before */
 
-import {expect} from 'chai'
-import {JSONLD} from '../../../src/api/jsonld'
-import {URIValue} from '@rheactorjs/value-objects'
-import {Link} from '@rheactorjs/models'
+import { expect } from 'chai'
+import { JSONLD } from '../../../src/api/jsonld'
+import { URIValue } from '@rheactorjs/value-objects'
+import { Link } from '@rheactorjs/models'
+import { ValidationFailedError } from '@rheactorjs/errors'
 
 const UserContext = new URIValue('https://github.com/RHeactorJS/models#User')
 const UserTaskContext = new URIValue('https://github.com/RHeactorJS/models#UserTask')
@@ -49,7 +50,11 @@ describe('jsonld', function () {
       })
     })
     it('should throw an error if $id does not match the pattern', () => {
-      expect(() => jsonld.parseIds(UserTaskContext, new URIValue('http://foo.com/'))).to.throw(/ValidationFailedError/)
+      try {
+        jsonld.parseIds(UserTaskContext, new URIValue('http://foo.com/'))
+      } catch (err) {
+        expect(err instanceof ValidationFailedError).to.equal(true)
+      }
     })
   })
 

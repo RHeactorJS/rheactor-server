@@ -24,7 +24,7 @@ export default (templateMailerClient, config, webConfig) => {
         return accountActivationToken(new URIValue(config.get('api_host')), config.get('private_key'), config.get('activation_token_lifetime'), cmd.user)
           .then((token) => {
             return templateMailerClient
-              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['email_verification_template'], cmd.email.toString(), cmd.user.name(), {
+              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['email_verification_template'], cmd.email.toString(), cmd.user.name, {
                 recipient: {
                   firstname: cmd.user.firstname,
                   lastname: cmd.user.lastname

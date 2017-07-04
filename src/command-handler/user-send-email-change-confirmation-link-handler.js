@@ -24,7 +24,7 @@ export default (templateMailerClient, config, webConfig) => {
         return changeEmailToken(new URIValue(config.get('api_host')), config.get('private_key'), config.get('token_lifetime'), cmd.user, {email: cmd.email.toString()})
           .then((token) => {
             return templateMailerClient
-              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['email_change_template'], cmd.email.toString(), cmd.user.name(), {
+              .send(mailerConfig['transport'], mailerConfig['template_prefix'] + mailerConfig['email_change_template'], cmd.email.toString(), cmd.user.name, {
                 recipient: {
                   firstname: cmd.user.firstname,
                   lastname: cmd.user.lastname

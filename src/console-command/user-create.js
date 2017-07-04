@@ -22,7 +22,7 @@ export const userCreateConsoleCommand = {
             event => {
               return backend.repositories.user.getById(event.aggregateId)
                 .then(user => {
-                  console.log('User created', user.name(), user.email.toString())
+                  console.log('User created', user.name, user.email.toString())
                   console.log('Password is 12345678')
                 })
             })

@@ -29,7 +29,7 @@ Feature: User preferences
     ----------------------------
     And "{version}" is the If-Match header
     When I PUT to {updatePreferences}
-    Then the status code should be 204
+    Then the status code should be 202
     # Fetch the profile
     Given the request body is empty
     When I GET {jwt.sub}

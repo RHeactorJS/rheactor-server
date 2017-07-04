@@ -6,7 +6,6 @@ import _merge from 'lodash/merge'
 import {Pagination} from '../../util/pagination'
 import {sendPaginatedListResponse} from '../pagination'
 import {URIValue, EmailValue} from '@rheactorjs/value-objects'
-import {User} from '@rheactorjs/models'
 import verifySuperUser from '../verify-superuser'
 
 /**
@@ -50,9 +49,11 @@ export default (app, config, emitter, userRepo, tokenAuth, jsonld, sendHttpProbl
         throw new ValidationFailedError('Validation failed', req.body, v.error)
       }
       return verifySuperUser(req, userRepo)
-        .then(superUser => emitter.emit(new CreateUserCommand(new EmailValue(v.value.email), v.value.firstname, v.value.lastname, '$2a$04$9J9g5cfQKyf1bMCQZg7oGua.CjHe5lfOQs4jW5fwGN/Gm5zTxPqh2', true)))
+        .then(() => {
+          emitter.emit(new CreateUserCommand(new EmailValue(v.value.email), v.value.firstname, v.value.lastname, '$2a$04$9J9g5cfQKyf1bMCQZg7oGua.CjHe5lfOQs4jW5fwGN/Gm5zTxPqh2', true))
+          res.status(202).send()
+        })
     })
-    .then(event => res.header('Location', jsonld.createId(User.$context, event.aggregateId)).status(201).send())
     .catch(sendHttpProblem.bind(null, res))
   )
 

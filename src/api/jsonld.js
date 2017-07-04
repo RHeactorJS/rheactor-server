@@ -127,16 +127,6 @@ export class JSONLD {
     URIValueType(id, ['JSONLD', 'encodeId()', 'id:URIValue'])
     return Buffer.from(encodeURI(encodeURIComponent(id.toString())), 'binary').toString('base64')
   }
-
-  /**
-   * Returns true if x is of type JSONLD
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof JSONLD) || (x && x.constructor && x.constructor.name === JSONLD.name && 'typeLinks' in x && 'typeMap' in x)
-  }
 }
 
-export const JSONLDType = irreducible('JSONLDType', JSONLD.is)
+export const JSONLDType = irreducible('JSONLDType', x => x instanceof JSONLD)

@@ -8,9 +8,9 @@ export default {
       .map((user) => {
         console.log(
           '-',
-          user.aggregateId(),
+          user.meta.id,
           user.superUser ? colors.blue('^') : ' ',
-          user.name(),
+          user.name,
           user.email.toString(),
           user.isActive ? colors.green('[active]') : colors.red('[inactive]')
         )

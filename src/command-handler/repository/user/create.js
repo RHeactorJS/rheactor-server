@@ -1,5 +1,4 @@
 import {CreateUserCommand} from '../../../command/user/create'
-import {UserModel} from '../../../model/user'
 
 export default {
   command: CreateUserCommand,
@@ -8,5 +7,5 @@ export default {
    * @param {CreateUserCommand} cmd
    * @return {UserCreatedEvent}
    */
-  handler: (repository, cmd) => repository.add(new UserModel(cmd.email, cmd.firstname, cmd.lastname, cmd.password, cmd.active, cmd.avatar), cmd.author)
+  handler: (repository, cmd) => repository.add({...cmd, isActive: cmd.active}, cmd.author)
 }

@@ -5,7 +5,7 @@ import ActivateUserCommand from '../../command/user/activate'
 import DeactivateUserCommand from '../../command/user/deactivate'
 import {ValidationFailedError, ConflictError, AccessDeniedError} from '@rheactorjs/errors'
 import Joi from 'joi'
-import {checkVersion} from '../check-version'
+import {checkVersionImmutable} from '../check-version'
 import _merge from 'lodash/merge'
 import verifySuperUser from '../verify-superuser'
 import {EmailValue, URIValue} from '@rheactorjs/value-objects'
@@ -61,12 +61,9 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
       return userRepository.getById(req.user)
     })
     .then(user => {
-      checkVersion(req.authInfo.payload['$aggregateMeta'][user.constructor.name].version, user)
-      return emitter.emit(new ChangeUserEmailCommand(user, new EmailValue(req.authInfo.payload.email), user))
-        .then(event => res
-          .header('etag', user.aggregateVersion())
-          .header('last-modified', new Date(event.createdAt).toUTCString())
-          .status(204).send())
+      checkVersionImmutable(req.authInfo.payload['meta'].version, user)
+      emitter.emit(new ChangeUserEmailCommand(user, new EmailValue(req.authInfo.payload.email), user))
+      res.status(202).send()
     })
     .catch(err => sendHttpProblem(res, err))
   )
@@ -91,15 +88,10 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
       return userRepository.findByEmail(new EmailValue(v.value.value))
         .then(existingUser => {
           if (existingUser) throw new ConflictError('Email address already in use: ' + v.value.value)
-          checkVersion(req.headers['if-match'], user)
-          return emitter.emit(new ChangeUserEmailCommand(user, new EmailValue(v.value.value), superUser))
+          checkVersionImmutable(req.headers['if-match'], user)
+          emitter.emit(new ChangeUserEmailCommand(user, new EmailValue(v.value.value), superUser))
+          res.status(202).send()
         })
-        .then(event => res
-          .header('etag', user.aggregateVersion())
-          .header('last-modified', new Date(event.createdAt).toUTCString())
-          .status(204)
-          .send()
-        )
     })
     .catch(err => sendHttpProblem(res, err))
   )
@@ -139,7 +131,7 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
         })
         .spread((user, author) => {
           author = author || user
-          checkVersion(req.headers['if-match'], user)
+          checkVersionImmutable(req.headers['if-match'], user)
           let cmd
           switch (property) {
             case 'active':
@@ -162,11 +154,8 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
               if (user[property] === value) throw new ConflictError(property + ' not changed ("' + value + '")!')
               cmd = new UpdateUserPropertyCommand(user, property, value, author)
           }
-          return emitter.emit(cmd)
-            .then(event => res
-              .header('etag', user.aggregateVersion())
-              .header('last-modified', new Date(event.createdAt).toUTCString())
-              .status(204).send())
+          emitter.emit(cmd)
+          res.status(202).send()
         })
     })
 

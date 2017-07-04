@@ -1,9 +1,10 @@
-import {ModelEvent, AggregateRoot} from '@rheactorjs/event-store'
+import {ModelEvent, ImmutableAggregateRoot, AggregateMeta} from '@rheactorjs/event-store'
 import {ValidationFailedError, ConflictError, UnhandledDomainEventError} from '@rheactorjs/errors'
-import {String as StringType, Any as AnyType, Boolean as BooleanType, irreducible, maybe, dict} from 'tcomb'
+import {String as StringType, Any as AnyType, Boolean as BooleanType, irreducible, maybe, dict, Date as DateType} from 'tcomb'
 import {URIValue, URIValueType, MaybeURIValueType, EmailValue, EmailValueType} from '@rheactorjs/value-objects'
 import {SuperUserPermissionsGrantedEvent, UserPropertyChangedEvent, UserPreferencesChangedEvent, UserAvatarUpdatedEvent, UserActivatedEvent, UserDeactivatedEvent, UserEmailChangedEvent, UserCreatedEvent, UserPasswordChangedEvent, SuperUserPermissionsRevokedEvent} from '../event/user'
 const PreferencesType = dict(StringType, AnyType)
+const MaybeDateType = maybe(DateType)
 
 const passwordRegex = /^\$2a\$\d+\$.+/
 
@@ -19,12 +20,10 @@ const stringPropertyChange = (self, property, value, author) => {
   AnyType(value)
   UserModelType(author)
   if (value === self[property]) throw new ConflictError(property + ' not changed!')
-  self[property] = value
-  self.updated()
-  return new ModelEvent(self.aggregateId(), UserPropertyChangedEvent, {property, value}, self.updatedAt(), author.aggregateId())
+  return new ModelEvent(self.meta.id, UserPropertyChangedEvent, {property, value}, new Date(), author.meta.id)
 }
 
-export class UserModel extends AggregateRoot {
+export class UserModel extends ImmutableAggregateRoot {
   /**
    * @param {EmailValue} email
    * @param {String} firstname
@@ -33,27 +32,26 @@ export class UserModel extends AggregateRoot {
    * @param {Boolean} active
    * @param {URIValue} avatar
    * @param {Object} preferences
+   * @param {Date} activatedAt
+   * @param {Date} deactivatedAt
+   * @param {Boolean} superUser
+   * @param {AggregateMeta} meta
    * @constructor
    * @throws ValidationFailedError if the creation fails due to invalid data
    */
-  constructor (email, firstname, lastname, password, active = false, avatar, preferences = {}) {
-    super()
-    EmailValueType(email)
-    StringType(firstname)
-    StringType(lastname)
-    StringType(password)
-    BooleanType(active)
-    MaybeURIValueType(avatar)
-    PreferencesType(preferences)
-    this.email = email
-    this.firstname = firstname
-    this.lastname = lastname
-    this.password = password
-    this.isActive = active
-    this.activatedAt = (active) ? new Date() : undefined
-    this.avatar = avatar
-    this.superUser = false
-    this.preferences = preferences
+  constructor (email, firstname, lastname, password, active = false, avatar, preferences = {}, activatedAt = undefined, deactivatedAt = undefined, superUser = false, meta) {
+    super(meta)
+    this.email = EmailValueType(email, ['UserModel()', 'email:EmailValue'])
+    this.firstname = StringType(firstname, ['UserModel()', 'firstname:String'])
+    this.lastname = StringType(lastname, ['UserModel()', 'lastname:String'])
+    this.password = StringType(password, ['UserModel()', 'password:String'])
+    this.isActive = BooleanType(active, ['UserModel()', 'active:Boolean'])
+    this.activatedAt = (this.isActive) ? MaybeDateType(activatedAt, ['UserModel()', 'activatedAt:?Date']) || new Date() : undefined
+    this.deactivatedAt = MaybeDateType(deactivatedAt, ['UserModel()', 'deactivatedAt:?Date'])
+    this.avatar = MaybeURIValueType(avatar, ['UserModel()', 'avatar:?URIValue'])
+    this.superUser = BooleanType(superUser, ['UserModel()', 'superUser:Boolean'])
+    this.preferences = PreferencesType(preferences, ['UserModel()', 'preferences:Preferences'])
+    this.name = [this.firstname, this.lastname].join(' ')
   }
 
   /**
@@ -85,9 +83,7 @@ export class UserModel extends AggregateRoot {
   setPreferences (preferences, author) {
     PreferencesType(preferences, ['UserModel', 'setPreferences()', 'preferences:Map(String: Any)'])
     UserModelType(author)
-    this.preferences = preferences
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserPreferencesChangedEvent, preferences, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, UserPreferencesChangedEvent, preferences, new Date(), author.meta.id)
   }
 
   /**
@@ -102,9 +98,7 @@ export class UserModel extends AggregateRoot {
     if (!passwordRegex.test(password)) {
       throw new ValidationFailedError('UserModel.password validation failed')
     }
-    this.password = password
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserPasswordChangedEvent, {password}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, UserPasswordChangedEvent, {password}, new Date(), author.meta.id)
   }
 
   /**
@@ -115,9 +109,7 @@ export class UserModel extends AggregateRoot {
   setAvatar (avatar, author) {
     URIValueType(avatar)
     UserModelType(author)
-    this.avatar = avatar
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserAvatarUpdatedEvent, {avatar: avatar.toString()}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, UserAvatarUpdatedEvent, {avatar: avatar.toString()}, new Date(), author.meta.id)
   }
 
   /**
@@ -130,10 +122,7 @@ export class UserModel extends AggregateRoot {
     if (this.isActive) {
       throw new ConflictError('Already activated!')
     }
-    this.isActive = true
-    this.activatedAt = new Date()
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserActivatedEvent, {}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, UserActivatedEvent, {}, new Date(), author.meta.id)
   }
 
   /**
@@ -146,10 +135,7 @@ export class UserModel extends AggregateRoot {
     if (!this.isActive) {
       throw new ConflictError('Not activated!')
     }
-    this.isActive = false
-    this.deactivatedAt = new Date()
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserDeactivatedEvent, {}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, UserDeactivatedEvent, {}, new Date(), author.meta.id)
   }
 
   /**
@@ -162,9 +148,7 @@ export class UserModel extends AggregateRoot {
     if (this.superUser) {
       throw new ConflictError('Already SuperUser!')
     }
-    this.superUser = true
-    this.updated()
-    return new ModelEvent(this.aggregateId(), SuperUserPermissionsGrantedEvent, {}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, SuperUserPermissionsGrantedEvent, {}, new Date(), author.meta.id)
   }
 
   /**
@@ -177,9 +161,7 @@ export class UserModel extends AggregateRoot {
     if (!this.superUser) {
       throw new ConflictError('Not SuperUser!')
     }
-    this.superUser = false
-    this.updated()
-    return new ModelEvent(this.aggregateId(), SuperUserPermissionsRevokedEvent, {}, this.updatedAt(), author.aggregateId())
+    return new ModelEvent(this.meta.id, SuperUserPermissionsRevokedEvent, {}, new Date(), author.meta.id)
   }
 
   /**
@@ -192,93 +174,48 @@ export class UserModel extends AggregateRoot {
     EmailValueType(email)
     UserModelType(author)
     const oldemail = this.email ? this.email.toString() : undefined
-    this.email = email
-    this.updated()
-    return new ModelEvent(this.aggregateId(), UserEmailChangedEvent, {email: email.toString(), oldemail}, this.updatedAt(), author.aggregateId())
-  }
-
-  /**
-   * @returns {string}
-   */
-  name () {
-    return [this.firstname, this.lastname].join(' ')
+    return new ModelEvent(this.meta.id, UserEmailChangedEvent, {email: email.toString(), oldemail}, new Date(), author.meta.id)
   }
 
   /**
    * Applies the event
    *
    * @param {ModelEvent} event
+   * @param {UserModel|undefined} user
+   * @return {UserModel}
    */
-  applyEvent (event) {
-    const data = event.data
-    switch (event.name) {
+  static applyEvent (event, user) {
+    const {name, data: {email, firstname, lastname, password, isActive, avatar, preferences, property, value}, createdAt, aggregateId} = event
+    switch (name) {
       case UserCreatedEvent:
-        this.email = new EmailValue(data.email)
-        this.firstname = data.firstname
-        this.lastname = data.lastname
-        this.password = data.password
-        this.isActive = data.isActive
-        this.activatedAt = event.createdAt
-        if (data.avatar) {
-          this.avatar = new URIValue(data.avatar)
-        }
-        this.persisted(event.aggregateId, event.createdAt)
-        this.preferences = {}
-        break
+        return new UserModel(new EmailValue(email), firstname, lastname, password, isActive, avatar ? new URIValue(avatar) : undefined, {}, undefined, undefined, false, new AggregateMeta(aggregateId, 1, createdAt))
       case UserPasswordChangedEvent:
-        this.password = data.password
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, password, user.isActive, user.avatar, user.preferences, user.activatedAt, user.deactivatedAt, user.superUser, user.meta.updated(createdAt))
       case UserEmailChangedEvent:
-        this.email = new EmailValue(data.email)
-        this.updated(event.createdAt)
-        break
+        return new UserModel(new EmailValue(email), user.firstname, user.lastname, user.password, user.isActive, user.avatar, user.preferences, user.activatedAt, user.deactivatedAt, user.superUser, user.meta.updated(createdAt))
       case UserActivatedEvent:
-        this.isActive = true
-        this.activatedAt = event.createdAt
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, true, user.avatar, user.preferences, createdAt, user.deactivatedAt, user.superUser, user.meta.updated(createdAt))
       case UserDeactivatedEvent:
-        this.isActive = false
-        this.deactivatedAt = event.createdAt
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, false, user.avatar, user.preferences, user.activatedAt, createdAt, user.superUser, user.meta.updated(createdAt))
       case UserAvatarUpdatedEvent:
-        this.avatar = new URIValue(data.avatar)
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, user.isActive, new URIValue(avatar), user.preferences, user.activatedAt, user.deactivatedAt, user.superUser, user.meta.updated(createdAt))
       case SuperUserPermissionsGrantedEvent:
-        this.superUser = true
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, user.isActive, user.avatar, user.preferences, user.activatedAt, user.deactivatedAt, true, user.meta.updated(createdAt))
       case SuperUserPermissionsRevokedEvent:
-        this.superUser = false
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, user.isActive, user.avatar, user.preferences, user.activatedAt, user.deactivatedAt, false, user.meta.updated(createdAt))
       case UserPropertyChangedEvent:
-        this[data.property] = data.value
-        this.updated(event.createdAt)
-        break
+        const userdata = {
+          firstname: user.firstname, lastname: user.lastname
+        }
+        userdata[property] = value
+        return new UserModel(user.email, userdata.firstname, userdata.lastname, user.password, user.isActive, user.avatar, user.preferences, user.activatedAt, user.deactivatedAt, false, user.meta.updated(createdAt))
       case UserPreferencesChangedEvent:
-        this.preferences = data
-        this.updated(event.createdAt)
-        break
+        return new UserModel(user.email, user.firstname, user.lastname, user.password, user.isActive, user.avatar, preferences, user.activatedAt, user.deactivatedAt, user.superUser, user.meta.updated(createdAt))
       default:
-        console.error('Unhandled UserModel event', event.name)
         throw new UnhandledDomainEventError(event.name)
     }
   }
-
-  /**
-   * Returns true if x is of type UserModel
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof UserModel) || (x && x.constructor && x.constructor.name === UserModel.name && 'email' in x && 'firstname' in x && 'lastname' in x && 'password' in x && 'isActive' in x)
-  }
 }
 
-export const UserModelType = irreducible('UserModelType', UserModel.is)
+export const UserModelType = irreducible('UserModelType', x => x instanceof UserModel)
 export const MaybeUserModelType = maybe(UserModelType)

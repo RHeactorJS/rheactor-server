@@ -1,12 +1,12 @@
-import {AggregateRepository, AggregateIndex, ModelEvent, ModelEventType} from '@rheactorjs/event-store'
-import {UserModel, UserModelType, MaybeUserModelType} from '../model/user'
+import {ImmutableAggregateRepository, AggregateIndex, ModelEvent, ModelEventType} from '@rheactorjs/event-store'
+import {UserModel, MaybeUserModelType} from '../model/user'
 import {EntryNotFoundError} from '@rheactorjs/errors'
 import {EmailValueType} from '@rheactorjs/value-objects'
 import Promise from 'bluebird'
 import {UserCreatedEvent, UserEmailChangedEvent} from '../event/user'
 import {PaginationType} from '../util/pagination'
 
-export class UserRepository extends AggregateRepository {
+export class UserRepository extends ImmutableAggregateRepository {
   /**
    * Creates a new user repository
    *
@@ -28,7 +28,7 @@ export class UserRepository extends AggregateRepository {
     EmailValueType(email)
     return this
       .getByEmail(email)
-      .catch(err => EntryNotFoundError.is(err), () => {
+      .catch(EntryNotFoundError, () => {
         return null
       })
   }
@@ -72,38 +72,28 @@ export class UserRepository extends AggregateRepository {
    * The precondition is that a user with the same email address must not exist,
    * therefore the email address index for this aggregate is consulted before
    *
-   * @param {UserModel} user
+   * @param {Object} userdata
    * @param {UserModel} author Can be empty, if user is creating themselves
    * @returns {Promise.<Number>} of the id
    */
-  add (user, author) {
-    UserModelType(user)
+  add (userdata, author) {
     MaybeUserModelType(author)
     const data = {
-      email: user.email.toString(),
-      firstname: user.firstname,
-      lastname: user.lastname,
-      password: user.password,
-      isActive: user.isActive
+      email: userdata.email.toString(),
+      firstname: userdata.firstname,
+      lastname: userdata.lastname,
+      password: userdata.password,
+      isActive: userdata.isActive
     }
-    if (user.avatar) {
-      data.avatar = user.avatar.toString()
+    if (userdata.avatar) {
+      data.avatar = userdata.avatar.toString()
     }
-
     return Promise
       .resolve(this.redis.incrAsync(this.aggregateAlias + ':id'))
       .then((id) => {
         id = '' + id
         return this.index.addIfNotPresent('email', data.email, id)
-          .then(() => {
-            const event = new ModelEvent(id, UserCreatedEvent, data, new Date(), author ? author.aggregateId() : undefined)
-            return this.eventStore
-              .persist(event)
-              .then(() => {
-                user.applyEvent(event)
-                return event
-              })
-          })
+          .then(() => this.persistEvent(new ModelEvent(id, UserCreatedEvent, data, new Date(), author ? author.meta.id : undefined)))
       })
   }
 
@@ -115,7 +105,7 @@ export class UserRepository extends AggregateRepository {
    */
   persistEvent (modelEvent) {
     ModelEventType(modelEvent)
-    return AggregateRepository.prototype.persistEvent.call(this, modelEvent)
+    return super.persistEvent(modelEvent)
       .then(() => this.postPersist(modelEvent))
       .then(() => modelEvent)
   }

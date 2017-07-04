@@ -57,16 +57,6 @@ export class Pagination {
     }
     return new PaginatedResult(items, total, self.itemsPerPage, self.offset, query, prevOffset, nextOffset)
   }
-
-  /**
-   * Returns true if x is of type Pagination
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Pagination) || (x && x.constructor && x.constructor.name === Pagination.name && 'itemsPerPage' in x && 'offset' in x)
-  }
 }
 
-export const PaginationType = irreducible('PaginationType', Pagination.is)
+export const PaginationType = irreducible('PaginationType', x => x instanceof Pagination)

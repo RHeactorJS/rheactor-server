@@ -2,7 +2,7 @@ import Promise from 'bluebird'
 import ActivateUserCommand from '../../command/user/activate'
 import {isAccountActivationToken} from '../../util/tokens'
 import {AccessDeniedError} from '@rheactorjs/errors'
-import {checkVersion} from '../check-version'
+import {checkVersionImmutable} from '../check-version'
 
 /**
  * Manages reset-password requests.
@@ -25,7 +25,7 @@ export default function (app, config, emitter, userRepository, tokenAuth, sendHt
         }
         return userRepository.getById(req.user)
           .then((user) => {
-            checkVersion(req.authInfo.payload['$aggregateMeta'][user.constructor.name].version, user)
+            checkVersionImmutable(req.authInfo.payload['meta'].version, user)
             return emitter.emit(new ActivateUserCommand(user, user))
           })
       })

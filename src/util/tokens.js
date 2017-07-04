@@ -4,36 +4,34 @@ import {User, JsonWebToken, JsonWebTokenType} from '@rheactorjs/models'
 import JSONLD from '../config/jsonld'
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {Object as ObjectType, Integer as IntegerType, String as StringType} from 'tcomb'
-import {UserModelType} from '../model/user'
+import {AggregateIdType, AggregateVersionType} from '@rheactorjs/event-store'
 
 /**
  * @param {String} iss
  * @param {URIValue} apiHost
  * @param {String} privateKey
  * @param {Number} tokenLifetime
- * @param {UserModel} user
+ * @param {{meta: {id:Number}}}
  * @param {Object} payload
  * @returns {Promise.<JsonWebToken>}
  */
-const sign = (iss, apiHost, privateKey, tokenLifetime, user, payload = {}) => {
-  StringType(iss)
-  URIValueType(apiHost)
-  StringType(privateKey)
-  IntegerType(tokenLifetime)
-  UserModelType(user)
-  ObjectType(payload)
-  let jsonld = JSONLD(apiHost)
-  let aggregateMeta = {}
-  aggregateMeta[user.constructor.name] = user.$aggregateMeta
-  payload.$aggregateMeta = aggregateMeta
+const sign = (iss, apiHost, privateKey, tokenLifetime, {meta: {id, version}}, payload = {}) => {
+  StringType(iss, ['tokens.sign()', 'iss:String'])
+  URIValueType(apiHost, ['tokens.sign()', 'apiHost:URIValue'])
+  StringType(privateKey, ['tokens.sign()', 'privateKey:String'])
+  IntegerType(tokenLifetime, ['tokens.sign()', 'tokenLifetime:Integer'])
+  AggregateIdType(id, ['tokens.sign()', 'id:AggregateId'])
+  AggregateVersionType(version, ['tokens.sign()', 'version:AggregateVersion'])
+  ObjectType(payload, ['tokens.sign()', 'payload:Object'])
+  const jsonld = JSONLD(apiHost)
   return Promise.try(() => {
     let token = jwt.sign(
-      payload,
+      {...payload, meta: {id, version}},
       privateKey,
       {
         algorithm: 'RS256',
         issuer: iss,
-        subject: jsonld.createId(User.$context, user.aggregateId()).toString(),
+        subject: jsonld.createId(User.$context, id).toString(),
         expiresIn: tokenLifetime
       }
     )
@@ -55,7 +53,7 @@ export const lostPasswordToken = sign.bind(null, 'password-change')
  * @returns {boolean}
  */
 export const isLostPasswordToken = (token) => {
-  JsonWebTokenType(token)
+  JsonWebTokenType(token, 'tokens.isLostPasswordToken()', 'token:JsonWebToken')
   return token.iss === 'password-change'
 }
 
@@ -73,7 +71,7 @@ export const accountActivationToken = sign.bind(null, 'account-activation')
  * @returns {boolean}
  */
 export const isAccountActivationToken = (token) => {
-  JsonWebTokenType(token)
+  JsonWebTokenType(token, 'tokens.isAccountActivationToken()', 'token:JsonWebToken')
   return token.iss === 'account-activation'
 }
 
@@ -92,7 +90,7 @@ export const changeEmailToken = sign.bind(null, 'email-change')
  * @returns {boolean}
  */
 export const isChangeEmailToken = (token) => {
-  JsonWebTokenType(token)
+  JsonWebTokenType(token, 'tokens.isChangeEmailToken()', 'token:JsonWebToken')
   return token.iss === 'email-change'
 }
 
@@ -103,9 +101,9 @@ export const isChangeEmailToken = (token) => {
  * @returns {Promise.<JsonWebToken>}
  */
 export const verify = (apiHost, publicKey, token) => {
-  URIValueType(apiHost)
-  StringType(publicKey)
-  StringType(token)
+  URIValueType(apiHost, ['tokens.verify()', 'apiHost:URIValue'])
+  StringType(publicKey, ['tokens.verify()', 'privateKey:String'])
+  StringType(token, ['tokens.verify()', 'token:String'])
   const jsonld = JSONLD(apiHost)
   return Promise.try(() => {
     const decoded = jwt.verify(token, publicKey, {algorithms: ['RS256']})
