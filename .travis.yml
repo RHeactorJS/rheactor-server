@@ -32,5 +32,5 @@ branches:
     - /^v\d+\.\d+\.\d+$/
 matrix:
   include:
-    - node_js: 'node'
+#    - node_js: 'node'
     - node_js: '6'
