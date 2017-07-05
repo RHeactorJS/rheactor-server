@@ -2,7 +2,7 @@ import program from 'commander'
 import Promise from 'bluebird'
 import {red} from 'colors'
 import {kebabCase} from 'lodash'
-import backend from './backend'
+import backend from '../test/backend'
 import {rheactorjsConsoleCommands} from '../src/console-command/rheactorjs-console-commands'
 const config = backend.config
 
