@@ -1,14 +1,17 @@
+/* global process */
+
 import nconf from 'nconf'
 import path from 'path'
 
 nconf.use('memory')
 
-let host = '127.0.0.1'
-let port = 8080
+const host = '127.0.0.1'
+const port = 8080
+const environment = process.env.environment || 'testing'
 
 // Set defaults
 nconf.defaults({
-  'environment': 'testing',
+  environment,
   'version': '0.0.0',
   'mime_type': 'application/vnd.rheactorjs.core.v2+json',
   'port': port,
@@ -37,7 +40,7 @@ nconf.defaults({
     'email_verification_template': 'email-verification',
     'email_change_template': 'email-change'
   },
-  'trustedAvatarURL': '^https://example.com/.+'
+  'trustedAvatarURL': environment === 'testing' ? '^https://example.com/.+' : '*'
 })
 
 export default nconf
