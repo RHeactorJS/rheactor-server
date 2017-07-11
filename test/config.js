@@ -7,7 +7,7 @@ nconf.use('memory')
 
 const host = '127.0.0.1'
 const port = 8080
-const environment = process.env.environment || 'testing'
+const environment = process.env.environment || 'development'
 
 // Set defaults
 nconf.defaults({
@@ -40,7 +40,7 @@ nconf.defaults({
     'email_verification_template': 'email-verification',
     'email_change_template': 'email-change'
   },
-  'trustedAvatarURL': environment === 'testing' ? '^https://example.com/.+' : '*'
+  'trustedAvatarURL': environment === 'testing' ? '^https://example.com/.+' : '^https?://.+'
 })
 
 export default nconf
