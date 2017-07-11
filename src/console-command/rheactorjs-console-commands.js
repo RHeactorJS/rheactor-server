@@ -5,6 +5,7 @@ import sendTestMailConsoleCommand from './send-testmail'
 import userUpdateConsoleCommand from './user-update'
 import usersConsoleCommand from './users'
 import keysCommand from './keys'
+import verifyToken from './verify-token'
 import {userCreateConsoleCommand} from './user-create'
 
 export const rheactorjsConsoleCommands = [
@@ -15,5 +16,6 @@ export const rheactorjsConsoleCommands = [
   userCreateConsoleCommand,
   userUpdateConsoleCommand,
   usersConsoleCommand,
-  keysCommand
+  keysCommand,
+  verifyToken
 ]
