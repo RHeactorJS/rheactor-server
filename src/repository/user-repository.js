@@ -15,7 +15,7 @@ export class UserRepository extends ImmutableAggregateRepository {
    */
   constructor (redis) {
     super(UserModel, 'user', redis)
-    this.index = new AggregateIndex(this.aggregateAlias, redis)
+    this.index = new AggregateIndex(this.alias, redis)
   }
 
   /**
@@ -89,7 +89,7 @@ export class UserRepository extends ImmutableAggregateRepository {
       data.avatar = userdata.avatar.toString()
     }
     return Promise
-      .resolve(this.redis.incrAsync(this.aggregateAlias + ':id'))
+      .resolve(this.redis.incrAsync(this.alias + ':id'))
       .then((id) => {
         id = '' + id
         return this.index.addIfNotPresent('email', data.email, id)
