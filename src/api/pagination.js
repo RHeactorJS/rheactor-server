@@ -58,7 +58,7 @@ export const sendPaginatedListResponse = (apiHost, req, res, itemTransformer, re
     .then((models) => {
       let parsedReqUrl = url.parse(req.url, true)
       delete parsedReqUrl.search
-      parsedReqUrl._query = Object.assign(parsedReqUrl._query, result.query, {offset: ':offset'})
+      parsedReqUrl._query = {...parsedReqUrl._query, ...result.query, offset: ':offset'}
       let searchUrl = apiHost.slashless().toString() + url.format(parsedReqUrl).replace('%3Aoffset', ':offset')
       searchUrl = searchUrl.replace(/&$/, '')
       const list = new List(
