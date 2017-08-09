@@ -37,7 +37,7 @@ export class UserModel extends ImmutableAggregateRoot {
    * @param {Boolean} superUser
    * @param {AggregateMeta} meta
    * @constructor
-   * @throws ValidationFailedError if the creation fails due to invalid data
+   * @throws TypeError if the creation fails due to invalid data
    */
   constructor (email, firstname, lastname, password, active = false, avatar, preferences = {}, activatedAt = undefined, deactivatedAt = undefined, superUser = false, meta) {
     super(meta)

@@ -88,13 +88,10 @@ export class UserRepository extends ImmutableAggregateRepository {
     if (userdata.avatar) {
       data.avatar = userdata.avatar.toString()
     }
-    return Promise
-      .resolve(this.redis.incrAsync(this.alias + ':id'))
-      .then((id) => {
-        id = '' + id
-        return this.index.addIfNotPresent('email', data.email, id)
-          .then(() => this.persistEvent(new ModelEvent(id, UserCreatedEvent, data, new Date(), author ? author.meta.id : undefined)))
-      })
+    return this.redis.incrAsync(this.alias + ':id')
+      .then(id => this.index.addIfNotPresent('email', data.email, `${id}`)
+        .then(() => this.persistEvent(new ModelEvent(`${id}`, UserCreatedEvent, data, new Date(), author ? author.meta.id : undefined)))
+      )
   }
 
   /**
