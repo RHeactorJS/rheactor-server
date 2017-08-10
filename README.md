@@ -1,5 +1,7 @@
 # server
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RHeactorJS/server.svg)](https://greenkeeper.io/)
+
 [![npm version](https://img.shields.io/npm/v/@rheactorjs/server.svg)](https://www.npmjs.com/package/@rheactorjs/server)
 [![Build Status](https://travis-ci.org/RHeactorJS/server.svg?branch=master)](https://travis-ci.org/RHeactorJS/server)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
