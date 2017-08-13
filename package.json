@@ -30,7 +30,7 @@
   "dependencies": {
     "@rheactorjs/bdd-contexts": "^2.0.0",
     "@rheactorjs/errors": "1.x",
-    "@rheactorjs/event-store": "^3.0.0",
+    "@rheactorjs/event-store": "^3.0.1",
     "@rheactorjs/models": "^2.0.1",
     "@rheactorjs/template-mailer-client": "1.x",
     "@rheactorjs/value-objects": "^1.0.2",
