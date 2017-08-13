@@ -16,11 +16,15 @@ notifications:
 services:
   - redis-server
 before_install:
+  - npm install -g npm@5
+  - npm install -g greenkeeper-lockfile@1
   - npm install node-pre-gyp
 install:
   - npm install
-  - npm prune
+#  - npm prune // Broken because of https://github.com/npm/npm/issues/17781
   - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server; cd ../../
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
 script:
   - npm run lint
   - make dist
