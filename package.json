@@ -70,7 +70,7 @@
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
     "nyc": "^11.1.0",
-    "semantic-release": "^7.0.1",
+    "semantic-release": "^8.0.0",
     "showdown": "^1.7.2",
     "standard": "^10.0.3",
     "superagent": "^3.5.2",
