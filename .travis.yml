@@ -21,7 +21,7 @@ before_install:
   - npm install -g node-pre-gyp
 install:
   - npm install
-#  - npm prune // Broken because of https://github.com/npm/npm/issues/17781
+  - npm prune
   - cd node_modules; mkdir @rheactorjs; cd @rheactorjs; ln -s ../../ server; cd ../../
 before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
@@ -36,5 +36,5 @@ branches:
     - /^v\d+\.\d+\.\d+$/
 matrix:
   include:
-#    - node_js: 'node'
+    - node_js: 'node'
     - node_js: '6'
