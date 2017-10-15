@@ -1,7 +1,7 @@
-/* global describe, it */
+/* global describe expect, it */
 
 import {BackendEmitter} from '../../../src/services/emitter'
-import {expect} from 'chai'
+
 import {ModelEvent} from '@rheactorjs/event-store'
 
 describe('BackendEmitter', () => {
@@ -9,7 +9,7 @@ describe('BackendEmitter', () => {
     const event = new ModelEvent('17', 'SomeString')
     const emitter = new BackendEmitter()
     emitter.on('some_string', ev => {
-      expect(ev).to.equal(event)
+      expect(ev).toEqual(event)
       done()
     })
     emitter.emit(event)

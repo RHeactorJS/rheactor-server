@@ -1,8 +1,8 @@
-/* global describe, it, before */
+/* global describe expect it beforeAll */
 
 import Promise from 'bluebird'
 import helper from '../helper'
-import {expect} from 'chai'
+
 import {CreateUserCommand} from '../../../src/command/user/create'
 import {EmailValue} from '@rheactorjs/value-objects'
 import {UserModel} from '../../../src/model/user'
@@ -10,7 +10,7 @@ import {ModelEvent} from '@rheactorjs/event-store'
 import emitter from '../../../src/services/emitter'
 
 describe('UserRepository', function () {
-  before(helper.clearDb)
+  beforeAll(helper.clearDb)
 
   let repository = helper.repositories.user
 
@@ -34,18 +34,18 @@ describe('UserRepository', function () {
 
       Promise.join(emitter.emit(c1), emitter.emit(c2))
         .spread((e1, e2) => {
-          expect(e1).to.be.instanceof(ModelEvent)
-          expect(e2).to.be.instanceof(ModelEvent)
+          expect(e1).toBeInstanceOf(ModelEvent)
+          expect(e2).toBeInstanceOf(ModelEvent)
           return Promise
             .join(
               repository.getById(e1.aggregateId),
               repository.getById(e2.aggregateId)
             )
             .spread((u1, u2) => {
-              expect(u1.email.toString()).to.equal('john.doe@example.invalid')
-              expect(u1.meta.version).to.equal(1)
-              expect(u2.email.toString()).to.equal('jane.doe@example.invalid')
-              expect(u2.meta.version).to.equal(1)
+              expect(u1.email.toString()).toEqual('john.doe@example.invalid')
+              expect(u1.meta.version).toEqual(1)
+              expect(u2.email.toString()).toEqual('jane.doe@example.invalid')
+              expect(u2.meta.version).toEqual(1)
               done()
             })
         })
@@ -61,8 +61,8 @@ describe('UserRepository', function () {
       emitter
         .emit(c2)
         .catch((err) => {
-          expect(err.name).to.be.equal('EntryAlreadyExistsError')
-          expect(err.message).to.be.contain('jill.doe@example.invalid')
+          expect(err.name).toEqual('EntryAlreadyExistsError')
+          expect(err.message).toContain('jill.doe@example.invalid')
           done()
         })
     })
@@ -76,7 +76,7 @@ describe('UserRepository', function () {
           return repository.getById(user.meta.id)
         })
         .then((user) => {
-          expect(user).to.be.instanceof(UserModel)
+          expect(user).toBeInstanceOf(UserModel)
           done()
         })
     })
@@ -90,7 +90,7 @@ describe('UserRepository', function () {
           return repository.findById(user.meta.id)
         })
         .then((user) => {
-          expect(user).to.be.instanceof(UserModel)
+          expect(user).toBeInstanceOf(UserModel)
           done()
         })
     })

@@ -1,4 +1,4 @@
-@After=Index
+@After=User
 Feature: SuperUsers
   Accounts may be granted superuser permissions which allows them to perform
   special actions
@@ -79,7 +79,7 @@ Feature: SuperUsers
     When I POST to {userList}
     Then the status code should be 200
     And the Content-Type header should equal "application/vnd.rheactorjs.core.v2+json; charset=utf-8"
-    And a list of "https://github.com/RHeactorJS/models#User" with 8 of 8 items should be returned
+    And a list of "https://github.com/RHeactorJS/models#User" with 5 of 5 items should be returned
 
   Scenario: can search users by email
 

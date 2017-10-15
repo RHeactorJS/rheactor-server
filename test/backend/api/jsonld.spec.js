@@ -1,6 +1,5 @@
-/* global describe, it, before */
+/* global describe expect it beforeAll */
 
-import { expect } from 'chai'
 import { JSONLD } from '../../../src/api/jsonld'
 import { URIValue } from '@rheactorjs/value-objects'
 import { Link } from '@rheactorjs/models'
@@ -15,7 +14,7 @@ const NetworhkContext = new URIValue('https://github.com/ResourcefulHumans/netwo
 describe('jsonld', function () {
   let jsonld
 
-  before(() => {
+  beforeAll(() => {
     jsonld = new JSONLD()
     jsonld.mapType(UserContext, new URIValue('http://example.com/api/user/:id'))
     jsonld.mapType(UserTaskContext, new URIValue('http://example.com/api/user/:id/task/:task_id'))
@@ -25,26 +24,26 @@ describe('jsonld', function () {
 
   describe('.createId()', () => {
     it('should create an $id link', () => {
-      expect(jsonld.createId(UserContext, '42').equals(new URIValue('http://example.com/api/user/42'))).to.equal(true)
-      expect(jsonld.createId(UserContext, '17').equals(new URIValue('http://example.com/api/user/17'))).to.equal(true)
+      expect(jsonld.createId(UserContext, '42').equals(new URIValue('http://example.com/api/user/42'))).toEqual(true)
+      expect(jsonld.createId(UserContext, '17').equals(new URIValue('http://example.com/api/user/17'))).toEqual(true)
     })
     it('should accept multiple ids', () => {
       const expected = 'http://example.com/api/user/42/task/17'
       const actual = jsonld.createId(UserTaskContext, {'id': '42', 'task_id': '17'}).toString()
-      expect(actual).to.equal(expected)
+      expect(actual).toEqual(expected)
     })
   })
 
   describe('.parseId()', () => {
     it('should parse an $id link', () => {
-      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/42'))).to.equal('42')
-      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/17'))).to.equal('17')
+      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/42'))).toEqual('42')
+      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/17'))).toEqual('17')
     })
   })
 
   describe('.parseIds()', () => {
     it('should parse an $id link with multiple ids', () => {
-      expect(jsonld.parseIds(UserTaskContext, new URIValue('http://example.com/api/user/42/task/17'))).to.deep.equal({
+      expect(jsonld.parseIds(UserTaskContext, new URIValue('http://example.com/api/user/42/task/17'))).toEqual({
         'id': '42',
         'task_id': '17'
       })
@@ -53,7 +52,7 @@ describe('jsonld', function () {
       try {
         jsonld.parseIds(UserTaskContext, new URIValue('http://foo.com/'))
       } catch (err) {
-        expect(err instanceof ValidationFailedError).to.equal(true)
+        expect(err instanceof ValidationFailedError).toEqual(true)
       }
     })
   })
@@ -61,28 +60,28 @@ describe('jsonld', function () {
   describe('.createLinks()', () => {
     it('should create links', () => {
       const links42 = jsonld.createLinks(UserContext, '42')
-      expect(links42[0].$context.equals(Link.$context)).to.equal(true)
-      expect(links42[0].subject.equals(NetworhkContext)).to.equal(true)
-      expect(links42[0].href.equals(new URIValue('http://example.com/api/user/42/search/netwoRHk'))).to.equal(true)
-      expect(links42[0].list).to.equal(true)
-      expect(links42[0].rel).to.equal(undefined)
+      expect(links42[0].$context.equals(Link.$context)).toEqual(true)
+      expect(links42[0].subject.equals(NetworhkContext)).toEqual(true)
+      expect(links42[0].href.equals(new URIValue('http://example.com/api/user/42/search/netwoRHk'))).toEqual(true)
+      expect(links42[0].list).toEqual(true)
+      expect(links42[0].rel).toEqual(undefined)
       const links17 = jsonld.createLinks(UserContext, '17')
-      expect(links17[0].$context.equals(Link.$context)).to.equal(true)
-      expect(links17[0].subject.equals(NetworhkContext)).to.equal(true)
-      expect(links17[0].href.equals(new URIValue('http://example.com/api/user/17/search/netwoRHk'))).to.equal(true)
-      expect(links17[0].list).to.equal(true)
-      expect(links17[0].rel).to.equal(undefined)
+      expect(links17[0].$context.equals(Link.$context)).toEqual(true)
+      expect(links17[0].subject.equals(NetworhkContext)).toEqual(true)
+      expect(links17[0].href.equals(new URIValue('http://example.com/api/user/17/search/netwoRHk'))).toEqual(true)
+      expect(links17[0].list).toEqual(true)
+      expect(links17[0].rel).toEqual(undefined)
     })
     it('should create links for multiple ids', () => {
       const links = jsonld.createLinks(ContributionContext, {
         id: '17',
         networhk_id: '42'
       })
-      expect(links[0].$context.equals(Link.$context)).to.equal(true)
-      expect(links[0].subject.equals(CommitmentContext)).to.equal(true)
-      expect(links[0].href.equals(new URIValue('http://example.com/api/netwoRHk/42/search/commitment?contribution=17'))).to.equal(true)
-      expect(links[0].list).to.equal(true)
-      expect(links[0].rel).to.equal(undefined)
+      expect(links[0].$context.equals(Link.$context)).toEqual(true)
+      expect(links[0].subject.equals(CommitmentContext)).toEqual(true)
+      expect(links[0].href.equals(new URIValue('http://example.com/api/netwoRHk/42/search/commitment?contribution=17'))).toEqual(true)
+      expect(links[0].list).toEqual(true)
+      expect(links[0].rel).toEqual(undefined)
     })
   })
 })
