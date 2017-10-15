@@ -8,7 +8,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "environment=testing jest -i --forceExit",
     "test:api": "environment=testing jest -i --forceExit test/features",
-    "test:backend": "environment=testing jest -i --forceExit test/mocha",
+    "test:backend": "environment=testing jest -i --forceExit test/backend",
     "test:coverage": "environment=testing jest -i --forceExit --coverage",
     "test:coverage-travis": "npm run test:coverage && codeclimate-test-reporter < ./coverage/lcov.info && rm -rf ./coverage",
     "precommit": "npm run lint",
