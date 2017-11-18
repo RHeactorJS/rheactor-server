@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^4.2.0",
-    "@commitlint/config-angular": "^4.2.0",
+    "@commitlint/config-angular": "^5.0.0",
     "@rheactorjs/bdd-contexts": "^2.0.1",
     "@rheactorjs/yadda-feature-runner": "^3.0.1",
     "babel-cli": "^6.26.0",
