@@ -70,7 +70,7 @@
     "juice": "^4.2.2",
     "lolex": "^2.3.1",
     "nodemon": "^1.12.1",
-    "semantic-release": "^8.2.0",
+    "semantic-release": "^11.0.2",
     "showdown": "^1.8.3",
     "standard": "^10.0.3",
     "superagent": "^3.8.1",
