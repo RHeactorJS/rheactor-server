@@ -1,5 +1,4 @@
-import {User, Status, JsonWebToken, Link} from '@rheactorjs/models'
-import {JSONLD} from '../api/jsonld'
+import {User, Status, JsonWebToken, Link, JSONLD} from '@rheactorjs/models'
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 
 /**
