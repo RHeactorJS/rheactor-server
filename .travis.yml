@@ -27,10 +27,10 @@ before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
 script:
   - npm run lint
-  - make dist
+  - npm run pretest
   - npm run test:coverage-travis
 after_success:
-  - npm run semantic-release
+  - npx semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

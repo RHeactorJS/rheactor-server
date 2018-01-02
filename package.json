@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "standard",
     "dev-server": "environment=development nodemon --exec babel-node -e js -w ./src -d 1 test/server.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "pretest": "make dist",
     "test": "environment=testing jest -i --forceExit",
     "test:api": "environment=testing jest -i --forceExit test/features",
     "test:backend": "environment=testing jest -i --forceExit test/backend",
