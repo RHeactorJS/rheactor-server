@@ -30,7 +30,7 @@
   "dependencies": {
     "@rheactorjs/errors": "^1.0.2",
     "@rheactorjs/event-store": "^3.0.3",
-    "@rheactorjs/models": "^2.1.1",
+    "@rheactorjs/models": "^3.0.0",
     "@rheactorjs/template-mailer-client": "^1.0.1",
     "@rheactorjs/value-objects": "^1.0.4",
     "bcrypt": "^1.0.3",
