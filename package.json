@@ -55,7 +55,7 @@
     "tcomb": "^3.2.24"
   },
   "devDependencies": {
-    "@commitlint/cli": "^5.2.8",
+    "@commitlint/cli": "^6.0.0",
     "@commitlint/config-angular": "^5.1.1",
     "@rheactorjs/bdd-contexts": "^2.0.1",
     "@rheactorjs/yadda-feature-runner": "^3.0.2",
